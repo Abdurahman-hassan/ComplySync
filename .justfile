@@ -11,7 +11,7 @@ install:
     uv pip install -r requirements.txt
 
 manage-start:
-    python manage.py runserver 0.0.0.0:8080
+    python manage.py runserver 0.0.0.0:8000
 
 [linux]
 clean-migrations:
