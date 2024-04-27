@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from django.contrib.auth import get_user_model
+from rest_framework import serializers
 
 User = get_user_model()
 
@@ -18,11 +18,19 @@ class UserSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "email",
+            "email_details",
             "avatar",
             "is_superuser",
             "date_joined",
             "last_login",
         ]
+
+    def get_email_details(self, obj):
+        # Here, only the email is returned as there's no verification status to include
+        details = {
+            "email": obj.email
+        }
+        return details
 
 
 class UserSerializerPublic(serializers.Serializer):
