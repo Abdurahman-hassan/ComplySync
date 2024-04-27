@@ -15,9 +15,9 @@ class Register(generics.CreateAPIView):
     permission_classes = [RegisterPermission]
 
     def create(self, request, *args, **kwargs):
-        serializer = super().create(request, *args, **kwargs)
-        username = serializer.data["username"]
-        user_serializer = UserSerializer(User.objects.get(username=username))
+        serializer = super().create(request, *args, **kwargs)  # This calls the default create which handles saving the instance.
+        email = serializer.data["email"]  # Use 'email' instead of 'username'
+        user_serializer = UserSerializer(User.objects.get(email=email))  # Fetch user by email
         return Response(user_serializer.data, status=status.HTTP_201_CREATED)
 
     @extend_schema(operation_id="Register a user account", responses=UserSerializer)
