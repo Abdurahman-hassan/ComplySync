@@ -1,5 +1,18 @@
 #!/bin/bash
 
-nohup celery -A config worker --concurrency=10 --loglevel=info > logs/celery_logs.log 2>&1 & echo $! > worker.pid
-nohup celery -A config beat --loglevel=info > logs/celery_logs.log 2>&1 & echo $! > beat.pid
-gunicorn -c gunicorn_config.py
+# Ensure log directory exists
+mkdir -p logs
+
+# Start Celery worker and append to logs
+nohup celery -A config worker --concurrency=10 --loglevel=info >> logs/celery_logs.log 2>&1 & echo $! > worker.pid
+
+# Start Celery beat and append to the same log
+nohup celery -A config beat --loglevel=info >> logs/celery_logs.log 2>&1 & echo $! > beat.pid
+
+## Start Gunicorn and append to a different log, if you prefer
+#gunicorn -c gunicorn_config.py >> logs/gunicorn_logs.log 2>&1
+
+
+#nohup celery -A config worker --concurrency=10 --loglevel=info > logs/celery_logs.log 2>&1 & echo $! > worker.pid
+#nohup celery -A config beat --loglevel=info > logs/celery_logs.log 2>&1 & echo $! > beat.pid
+#gunicorn -c gunicorn_config.py
