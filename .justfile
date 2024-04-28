@@ -11,12 +11,11 @@ install:
     uv pip install -r requirements.txt
 
 manage-start:
-    python manage.py runserver_plus 0.0.0.0:8080
+    python manage.py runserver_plus 0.0.0.0:8000
 
 shell:
     python manage.py shell_plus
 
-[linux]
 clean:
     find . -path "./apps/*/migrations/*.py" -not -name "__init__.py" -delete
     python manage.py clean_pyc
