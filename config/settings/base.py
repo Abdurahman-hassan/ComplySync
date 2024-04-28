@@ -133,24 +133,24 @@ ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
 
-SOCIALACCOUNT_PROVIDERS = {
-    "google": {
-        "APP": {
-            "client_id": env("GOOGLE_CLIENT_ID"),
-            "secret": env("GOOGLE_SECRET"),
-            "key": "",
-        },
-        "SCOPE": [
-            "profile",
-            "email",
-        ],
-        "AUTH_PARAMS": {
-            "access_type": "offline",
-        },
-        "FETCH_USERINFO": True,
-        "OAUTH_PKCE_ENABLED": True,
-    }
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     "google": {
+#         "APP": {
+#             "client_id": env("GOOGLE_CLIENT_ID"),
+#             "secret": env("GOOGLE_SECRET"),
+#             "key": "",
+#         },
+#         "SCOPE": [
+#             "profile",
+#             "email",
+#         ],
+#         "AUTH_PARAMS": {
+#             "access_type": "offline",
+#         },
+#         "FETCH_USERINFO": True,
+#         "OAUTH_PKCE_ENABLED": True,
+#     }
+# }
 
 # === ROOT URLCONF ===========================================
 ROOT_URLCONF = "config.urls"
@@ -303,3 +303,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 DOMAIN = 'localhost:8000'
 SITE_NAME = 'ComplySync'
 USE_HTTPS = True
+
+# ==== Email settings ===========================================
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env.int('EMAIL_PORT')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
