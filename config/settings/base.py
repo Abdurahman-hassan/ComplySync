@@ -1,7 +1,8 @@
-from environ import Env
 import os
 from pathlib import Path
+
 from django.utils.translation import gettext_lazy as _
+from environ import Env
 
 # === BASE_DIR ===================================================
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -41,7 +42,6 @@ DJANGO_APPS = [
     "django.forms",
 ]
 
-
 THIRD_PARTY_APPS = [
     # ========
     "allauth",
@@ -49,19 +49,23 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     # ========
+    "djoser",
     "rest_framework",
     "rest_framework.authtoken",
+    'rest_framework_simplejwt',
+    # # we need to migrate the app to the database
+    'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
     "dj_rest_auth",
     # ========
     "django_filters",
+    "django_celery_beat",
     # ========
     "drf_spectacular",
     "drf_spectacular_sidecar",
     # ========
     "sentry_sdk",
 ]
-
 
 LOCAL_APPS = [
     "apps.users",
@@ -90,7 +94,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -223,6 +227,7 @@ CELERY_TASK_SEND_SENT_EVENT = True
 REST_FRAMEWORK = {}
 
 REST_FRAMEWORK["DEFAULT_AUTHENTICATION_CLASSES"] = [
+    "rest_framework.authentication.TokenAuthentication",
     "rest_framework.authentication.SessionAuthentication",
 ]
 REST_FRAMEWORK["DEFAULT_PERMISSION_CLASSES"] = [
@@ -249,5 +254,52 @@ SPECTACULAR_SETTINGS = {
     # "SCHEMA_PATH_PREFIX": "/api/",
 }
 # === THROTTLING ======================================================
-LOGIN_THROTTLING = 10
+LOGIN_THROTTLING = 50
 LOGIN_THROTTLING_IN = "hour"
+
+# === DJOSER ======================================================
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "SET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_CONFIRM_RETYPE": True,
+    "USERNAME_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "SEND_ACTIVATION_EMAIL": True,
+    "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_RESET_CONFIRM_URL": "auth/reset-password/?uid={uid}&token={token}",
+    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
+    "USERNAME_RESET_CONFIRM_URL": "email/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "auth/activate/?uid={uid}&token={token}",
+    "LOGOUT_ON_PASSWORD_CHANGE": True,
+    "USERNAME_RESET_CONFIRM_RETYPE": True,
+    "SERIALIZERS": {
+        "user_create": "apps.users.serializers.UserCreateSerializer",
+        "user": "apps.users.serializers.UserSerializer",
+        "current_user": "apps.users.serializers.UserSerializer",
+    },
+}
+
+# cors allowed origins
+CORS_ALLOW_ALL_ORIGINS = True
+
+# # REST FRAMEWORK Settings
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#     ],
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_simplejwt.authentication.JWTAuthentication',
+#
+#     ),
+# }
+
+# Simple JWT settings config
+# SIMPLE_JWT = {
+#     'AUTH_HEADER_TYPES': ('JWT',),
+#     'ACCESS_TOKEN_LIFETIME': timedelta(days=20)
+# }
+
+DOMAIN = 'localhost:8000'
+SITE_NAME = 'ComplySync'
+USE_HTTPS = True
