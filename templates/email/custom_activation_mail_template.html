@@ -1,0 +1,48 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Your Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>{% trans "Activate Your Account" %}</h2>
+    <p>{% trans "Hi" %} {{ user.email }},</p>
+    <p>{% trans "You're receiving this email because you need to finish the activation process for your account on" %} {{ site_name }} {% trans "platform"%}</p>
+    <p>{% trans "Please go to the following page and click the link provided to activate your account:" %}</p>
+    <a href="{{ activation_link }}" class="button">{% trans "Activate Account" %}</a>
+    <p>{% trans "Thank you for using" %} {{ site_name }}</p>
+    <p>{% trans "The" %} {{ site_name }} {% trans "Team" %}</p>
+</div>
+</body>
+</html>
