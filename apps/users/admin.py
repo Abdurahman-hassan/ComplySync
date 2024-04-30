@@ -18,6 +18,7 @@ class UserAdmin(auth_admin.UserAdmin):
             {
                 "fields": (
                     "name",
+                    "job_title",
                     "avatar",
                 )
             },
@@ -36,7 +37,13 @@ class UserAdmin(auth_admin.UserAdmin):
         ),
         (_("Important dates"), {"fields": ("last_login", "date_joined")}),
     )
-    list_display = ["email", "name", "is_superuser"]
+    list_display = ["email",
+                    "name",
+                    "job_title",
+                    "last_login",
+                    "date_joined",
+                    "is_superuser"]
+
     search_fields = ["name", "email"]
     ordering = ["id"]
     add_fieldsets = (
@@ -44,7 +51,7 @@ class UserAdmin(auth_admin.UserAdmin):
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "password1", "password2"),
+                "fields": ("email", "password1", "password2", "job_title"),
             },
         ),
     )
