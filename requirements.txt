@@ -115,3 +115,5 @@ zope.interface==6.3
 
 djoser~=2.2.2
 environ~=1.0
+
+pypdf~=4.2.0
