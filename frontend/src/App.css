@@ -1,3 +1,9 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* Styles for the overall signup container */
 .signup-container {
   width: 300px;
@@ -47,5 +53,75 @@
   font-size: 14px;
 }
 
-/* Additional styles for the signup component, if needed */
-/* ... */
+
+/* App.css */
+.app {
+  display: flex;
+}
+
+.sidebar {
+  position: fixed;
+  /* width: 200px; */
+  height: 100%; /* Make sidebar full height */
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1; /* Ensure sidebar is above main content */
+}
+
+.sidebar h1 {
+  margin-bottom: 20px;
+}
+
+.sidebar a {
+  text-decoration: none;
+}
+
+.sidebar a button {
+  width: 100%;
+  text-align: left;
+}
+
+.sidebar button {
+  margin-bottom: 10px;
+  padding: 10px;
+  color: #fff;
+  background-color: #555;
+  border: none;
+  cursor: pointer;
+}
+
+.sidebar button:hover {
+  background-color: #777;
+}
+
+.main-content {
+  margin-left: 220px; /* Push main content to the right of the sidebar */
+  margin-top: 50px; /* Push main content below the navbar */
+  flex-grow: 1;
+  padding: 20px; /* Add padding for content */
+  background-color: #f7f7f7;
+}
+
+.navbar {
+  position: fixed;
+  left: 200px; /* Start navbar after sidebar */
+  top: 0;
+  width: calc(100% - 200px); /* Adjust width to take sidebar into account */
+  background-color: #eee;
+  padding: 10px;
+  text-align: right;
+  /* z-index: 2; Ensure navbar is above main content */
+}
+
+.home {
+  padding: 20px;
+}
+
+.active button {
+  background-color: #007bff;
+  color: white;
+}
+
