@@ -12,7 +12,6 @@ from .tasks import send_activation_email
 User = get_user_model()
 
 
-# In your API view where users are created
 class BulkUserCreateAPIView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = BulkUserCreateSerializer(data=request.data)
