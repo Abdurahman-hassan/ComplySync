@@ -6,22 +6,22 @@ INSTALLED_APPS += ["collectfast", "storages"]
 TYPE_STORAGE = env("TYPE_STORAGE", default="local")
 
 if TYPE_STORAGE == "s3":
-    STORAGES = {
-        "default": {
-            "BACKEND": "storages.backends.s3.S3Storage",
-            "OPTIONS": {
-                "location": "media",
-                "file_overwrite": False,
-            },
-        },
-        "staticfiles": {
-            "BACKEND": "storages.backends.s3.S3Storage",
-            "OPTIONS": {
-                "location": "static",
-                "default_acl": "public-read",
-            },
-        },
-    }
+    # STORAGES = {
+    #     "default": {
+    #         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    #         "OPTIONS": {
+    #             "location": "media",
+    #             "file_overwrite": False,
+    #         },
+    #     },
+    #     "staticfiles": {
+    #         "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    #         "OPTIONS": {
+    #             "location": "static",
+    #             "default_acl": "None",
+    #         },
+    #     },
+    # }
 
     # https://django-storages.readthedocs.io/en/latest/backends/amazon-S3.html#settings
     AWS_ACCESS_KEY_ID = env("AWS_ACCESS_KEY_ID")
@@ -56,7 +56,10 @@ if TYPE_STORAGE == "s3":
     MEDIA_URL = f"{AWS_S3_HOST}/media/"
     STATIC_URL = f"{AWS_S3_HOST}/static/"
     COLLECTFAST_STRATEGY = "collectfast.strategies.boto3.Boto3Strategy"
-
+    STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+    AWS_DEFAULT_ACL = "private"
+    FILE_OVERWRITE = False
 
 elif TYPE_STORAGE == "gcp":
     STORAGES = {
@@ -90,3 +93,4 @@ elif TYPE_STORAGE == "local":
 
 else:
     raise TypeError("Please specify the value of TYPE_STORAGE in the .env file")
+
