@@ -1,0 +1,46 @@
+/* EmailUploader.css */
+.email-uploader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+}
+
+.email-uploader input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.email-uploader textarea {
+    border: 1px solid #ccc;
+    padding: 10px;
+    resize: vertical;
+    min-height: 100px;
+    width: 300px;
+}
+
+.email-uploader button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.email-uploader button:hover {
+    background-color: #0056b3;
+}
+
+.email-uploader p {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    margin: 10px 0;
+    text-align: center;
+}
+

@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import ActivationPage from './components/ActivationPage';
 import axios from 'axios';
+import EmailUploader from './components/EmailUploader';
 
 axios.interceptors.request.use(config => {
   const token = localStorage.getItem('authToken');
@@ -34,6 +35,11 @@ function App() {
         <Route path='/home' element={
           <ProtectedRoute>
             <Home />
+          </ProtectedRoute>
+        } />
+        <Route path='/emailuploader' element={
+          <ProtectedRoute>
+            <EmailUploader />
           </ProtectedRoute>
         } />
         <Route path="/" element={<Navigate replace to="/login" />} />
