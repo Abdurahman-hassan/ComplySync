@@ -1,3 +1,4 @@
+"""Policy models module."""
 from django.db import models
 
 STATUS_CHOICES = [('draft', 'Draft'), ('published', 'Published')]
