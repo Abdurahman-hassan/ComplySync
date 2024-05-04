@@ -7,6 +7,7 @@ from .models import Policy, Language
 class PolicyAdmin(admin.ModelAdmin):
     list_display = ('base_title', 'status', 'min_read_time', 'allow_download')
     list_filter = ('status', 'allow_download')
+    search_fields = ('id', 'base_title')
 
 
 @admin.register(Language)
