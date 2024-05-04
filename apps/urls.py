@@ -8,6 +8,7 @@ from apps.campaigns.views import CampaignViewSet
 from apps.groups.views import GroupViewSet
 from apps.policies.views import PolicyViewSet, LanguageViewSet
 from apps.users.views import BulkUserCreateAPIView
+from apps.policies.views import UploadLanguageDocumentView
 
 router = DefaultRouter()
 router.register(r'groups', GroupViewSet)
@@ -16,6 +17,7 @@ router.register(r'languages', LanguageViewSet)
 router.register(r'campaigns', CampaignViewSet)
 
 urlpatterns = [
+    path('upload-pdf/', UploadLanguageDocumentView.as_view(), name='upload_pdf'),
     path('bulk-create/', BulkUserCreateAPIView.as_view(), name='bulk_create'),
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.authtoken')),
