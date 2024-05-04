@@ -62,6 +62,22 @@ class LanguageViewSet(viewsets.ModelViewSet):
 
         return Response(presigned_urls)
 
+    @action(detail=True, methods=['get'], url_path='view-pdf')
+    def view_pdf_by_id(self, request, pk):
+        language = self.get_object()
+        if language.document_file:
+            url = self.generate_presigned_url(self, language.document_file.name)
+            return Response({
+                'language_id': language.id,
+                'localized_title': language.localized_title,
+                'presigned_url': url
+            })
+        return Response({
+            'language_id': language.id,
+            'localized_title': language.localized_title,
+            'presigned_url': None
+        })
+
     @staticmethod
     def generate_presigned_url(self, file_key):
         """Generate a presigned URL to share an S3 object."""
