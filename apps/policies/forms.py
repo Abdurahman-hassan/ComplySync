@@ -25,7 +25,7 @@ class CustomFileField(forms.FileField):
                 reader = pypdf.PdfReader(io.BytesIO(file.read()))
                 page_count = len(reader.pages)
                 file.seek(0)  # Reset file pointer to the start after reading
-            except pypdf.errors.PdfReadError as e:  # Catch specific pypdf errors
+            except pypdf.errors.PdfReadError as e:
                 raise ValidationError("Error reading PDF file. Please make sure the file is a valid PDF.")
             except Exception as e:
                 # Handle other exceptions that could occur
