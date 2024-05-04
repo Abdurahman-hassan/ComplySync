@@ -23,7 +23,7 @@ class UserCreateSerializer(BaseUserCreateSerializer):
 class UserSerializer(BaseUserSerializer):
     class Meta(BaseUserSerializer.Meta):
         model = User
-        fields = ['id', 'email', 'name', 'groups']
+        fields = ['id', 'email', 'name', 'groups', 'is_superuser', 'is_staff', 'is_active']
 
     def validate(self, attrs):
         validated_attr = super().validate(attrs)
