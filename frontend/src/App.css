@@ -99,7 +99,7 @@
 
 .main-content {
   margin-left: 220px; /* Push main content to the right of the sidebar */
-  margin-top: 50px; /* Push main content below the navbar */
+  margin-top: 35px; /* Push main content below the navbar */
   flex-grow: 1;
   padding: 20px; /* Add padding for content */
   background-color: #f7f7f7;
