@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import axios from "axios";
 
 // Layout component that includes the sidebar and navbar
-const Layout = ({ children, username }) => {
+const Layout = ({ children, username, handleLogout }) => {
 
     const navigate = useNavigate();
     const authToken = localStorage.getItem('authToken');
@@ -19,7 +19,7 @@ const Layout = ({ children, username }) => {
 
     const logout = async () => {
         await axios.post('http://127.0.0.1:8000/api/auth/token/logout/', null, { headers });
-        localStorage.removeItem('authToken');
+        handleLogout(); // Call the logout
         navigate('/login');
     };
 
