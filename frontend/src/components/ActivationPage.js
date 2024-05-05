@@ -20,7 +20,6 @@ function ActivationPage() {
                 .then(response => {
                     alert('Account activated successfully!');
                     navigate('/login');
-                    // Optionally redirect or perform further actions
                 })
                 .catch(error => {
                     alert('Failed to activate account. The link may be invalid or expired.');
@@ -31,7 +30,6 @@ function ActivationPage() {
     return (
         <div>
             <h1>Activating your account...</h1>
-            {/* You can show a loading spinner or any other content here */}
         </div>
     );
 }

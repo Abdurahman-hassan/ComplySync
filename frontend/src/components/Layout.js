@@ -19,7 +19,7 @@ const Layout = ({ children, username, handleLogout }) => {
 
     const logout = async () => {
         await axios.post('http://127.0.0.1:8000/api/auth/token/logout/', null, { headers });
-        handleLogout(); // Call the logout
+        handleLogout();
         navigate('/login');
     };
 
