@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../App';
 
 const Login = () => {
 
     const [formData, setFormData] = useState({ email: '', password: '' });
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const { handleLogin } = useContext(AuthContext);
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,7 +35,7 @@ const Login = () => {
         }).then(data => {
             console.log(data);
             const token = data.auth_token;
-            localStorage.setItem('authToken', token); // Store the token in local storage
+            handleLogin(token);
             navigate('/home');
         }).catch(error => {
             console.log(error.message);
