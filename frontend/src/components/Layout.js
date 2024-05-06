@@ -29,6 +29,7 @@ const Layout = ({ children, username, handleLogout }) => {
                 <h1>ComplySync</h1>
                 <NavLink to="/home" className={getActiveLinkClass}><button>Home</button></NavLink>
                 <NavLink to="/policies" className={getActiveLinkClass}><button>Policies</button></NavLink>
+                <NavLink to="/groups" className={getActiveLinkClass}><button>Groups</button></NavLink>
                 <NavLink to="/create-campaign" className={getActiveLinkClass}><button>Create Campaign</button></NavLink>
                 <NavLink to="/emailuploader" className={getActiveLinkClass}><button>Email Uploader</button></NavLink>
                 <button onClick={logout}>Logout</button>
