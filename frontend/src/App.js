@@ -12,6 +12,9 @@ import Policies from './components/Policies';
 import CreateCampaign from './components/CreateCampaign';
 import PolicyDetails from './components/PolicyDetails';
 import CreatePolicy from './components/CreatePolicy';
+import Groups from './components/Groups';
+import CreateGroup from './components/CreateGroup';
+import GroupDetails from './components/GroupDetails';
 
 // Create a context for the user's authentication state
 export const AuthContext = createContext();
@@ -132,6 +135,27 @@ function App() {
             <ProtectedRoute>
               <Layout username={username} handleLogout={handleLogout}>
                 <CreateCampaign />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/groups' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <Groups />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/groups/:groupId' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <GroupDetails />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/create-group' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <CreateGroup />
               </Layout>
             </ProtectedRoute>
           } />
