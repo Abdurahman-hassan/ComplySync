@@ -1,0 +1,126 @@
+.groups-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.groups-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.create-group-button {
+    display: block;
+    padding: 10px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #337ab7;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-group-button:hover {
+    background-color: #286090;
+}
+
+.group-item {
+    padding: 10px 15px;
+    margin: 10px 0;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.group-item:hover {
+    background-color: #f0f0f0;
+}
+
+.group-item p {
+    margin-top: 10px;
+    color: #686868;
+    font-size: 15px;
+}
+
+.pagination-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.prev-page-button, .next-page-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #337ab7;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prev-page-button:hover, .next-page-button:hover {
+    background-color: #286090;
+}
+
+.prev-page-button[disabled], .next-page-button[disabled] {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+
+.create-group-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-group-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 15px auto;
+    border: 1px solid #e1e1e1;
+    border-radius: 4px;
+}
+
+.create-group-form button {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #337ab7;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.create-group-form button:hover {
+    background-color: #286090;
+}
+
+.group-details {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.group-details h2 {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 24px;
+}
