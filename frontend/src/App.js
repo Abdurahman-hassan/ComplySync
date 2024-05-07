@@ -10,6 +10,8 @@ import Home from './components/Home';
 import ActivationPage from './components/ActivationPage';
 import EmailUploader from './components/EmailUploader';
 import Policies from './components/Policies';
+import Campaigns from './components/Campaigns';
+import CampaignDetails from './components/CampaignDetails';
 import CreateCampaign from './components/CreateCampaign';
 import PolicyDetails from './components/PolicyDetails';
 import CreatePolicy from './components/CreatePolicy';
@@ -132,6 +134,20 @@ function App() {
             <ProtectedRoute>
               <Layout username={username} handleLogout={handleLogout}>
                 <CreatePolicy />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/campaigns' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <Campaigns />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/campaigns/:campaignId' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <CampaignDetails />
               </Layout>
             </ProtectedRoute>
           } />
