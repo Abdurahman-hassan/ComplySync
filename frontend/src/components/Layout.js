@@ -1,18 +1,25 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../App";
 import axios from "axios";
+
 
 // Layout component that includes the sidebar and navbar
 const Layout = ({ children, username, handleLogout }) => {
 
     const navigate = useNavigate();
-    const authToken = localStorage.getItem('authToken');
+    const { authToken, isAdmin } = useAuth();
     // Memoize the headers object
     const headers = useMemo(() => ({
         'Authorization': `Token ${authToken}`
     }), [authToken]);
+    const [showBackButton, setShowBackButton] = useState(false);
+
+    // Listen for history changes
+    useEffect(() => {
+        // Check if there is history to go back to
+        setShowBackButton(navigate.length > 1);
+    }, [navigate]);
 
     // Function to determine the active link class
     const getActiveLinkClass = ({ isActive }) => isActive ? 'active' : '';
@@ -31,12 +38,17 @@ const Layout = ({ children, username, handleLogout }) => {
                 <NavLink to="/policies" className={getActiveLinkClass}><button>Policies</button></NavLink>
                 <NavLink to="/documents" className={getActiveLinkClass}><button>Documents</button></NavLink>
                 <NavLink to="/groups" className={getActiveLinkClass}><button>Groups</button></NavLink>
-                <NavLink to="/create-campaign" className={getActiveLinkClass}><button>Create Campaign</button></NavLink>
-                <NavLink to="/emailuploader" className={getActiveLinkClass}><button>Email Uploader</button></NavLink>
+                <NavLink to="/campaigns" className={getActiveLinkClass}><button>Campaigns</button></NavLink>
+                {isAdmin && (
+                    <NavLink to="/emailuploader" className={getActiveLinkClass}><button>Email Uploader</button></NavLink>
+                )}
                 <button onClick={logout}>Logout</button>
             </div>
             <div className="main-content">
                 <div className="navbar">
+                    {showBackButton && (
+                        <button className="back-btn" onClick={() => navigate(-1)}>Back</button>
+                    )}
                     <span>Welcome, {username}</span>
                 </div>
                 {children}
