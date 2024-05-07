@@ -1,4 +1,5 @@
 import './App.css';
+import './styles/UploadDocument.css';
 import { useState, useEffect, useMemo, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
@@ -15,6 +16,9 @@ import CreatePolicy from './components/CreatePolicy';
 import Groups from './components/Groups';
 import CreateGroup from './components/CreateGroup';
 import GroupDetails from './components/GroupDetails';
+import Documents from './components/Documents';
+import DocumentDetails from './components/DocumentDetails';
+import UploadDocument from './components/UploadDocument';
 
 // Create a context for the user's authentication state
 export const AuthContext = createContext();
@@ -156,6 +160,27 @@ function App() {
             <ProtectedRoute>
               <Layout username={username} handleLogout={handleLogout}>
                 <CreateGroup />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/documents' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <Documents />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/documents/:id' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <DocumentDetails />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path='/upload-pdf' element={
+            <ProtectedRoute>
+              <Layout username={username} handleLogout={handleLogout}>
+                <UploadDocument />
               </Layout>
             </ProtectedRoute>
           } />
