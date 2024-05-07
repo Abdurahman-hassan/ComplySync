@@ -1,0 +1,26 @@
+#djDebug {
+    display: none;
+}
+
+.pdf-form-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.pdf-form-container input, select, button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.pdf-form-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.pdf-form-container button:hover {
+    background-color: #0056b3;
+}
