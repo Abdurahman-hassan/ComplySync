@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Layout from './components/Layout';
 import Signup from './components/Signup';
@@ -18,13 +18,14 @@ import GroupDetails from './components/GroupDetails';
 import Documents from './components/Documents';
 import DocumentDetails from './components/DocumentDetails';
 import UploadDocument from './components/UploadDocument';
+import LandingPage from './components/LandingPage';
 
 const AppRoutes = ({ username, handleLogout }) => (
     <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/auth/activate" element={<ActivationPage />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Navigate replace to="/login" />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/home" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Home /></Layout></ProtectedRoute>} />
         <Route path="/emailuploader" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><EmailUploader /></Layout></ProtectedRoute>} />
         <Route path="/policies" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Policies /></Layout></ProtectedRoute>} />
