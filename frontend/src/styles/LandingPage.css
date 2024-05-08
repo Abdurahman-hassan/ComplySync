@@ -1,0 +1,163 @@
+/* .landing-page {
+    font-family: Arial, sans-serif;
+    
+} */
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    padding: 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+    z-index: 1000;
+}
+
+.navigation.scrolled {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navigation .logo {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.navigation a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
+    padding: 25px;
+    background-color: #fff;
+}
+
+.project-description, .feature-description {
+    text-align: center;
+}
+
+.project-description h1 {
+    font-size: 4rem;
+}
+
+.project-description p {
+    font-size: 0.9rem;
+    margin: 10px auto 41px;
+    color: #adadad;
+}
+
+.cover-image {
+    max-width: 40%;
+    height: auto;
+}
+
+.btn-deployed-app {
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 15px 20px;
+    background: #007bff;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.btn-deployed-app a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.features {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background: #fbfbfb;
+}
+
+.feature {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px auto;
+}
+
+.feature img {
+    max-width: 66%;
+    height: auto;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feature-description p {
+    font-size: 0.9rem;
+    color: #adadad;
+}
+
+.about {
+    padding: 50px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.about p {
+    font-size: 1.3rem;
+    color: #adadad;
+    width: 80vw;
+    margin: 50px 0px 40px;
+}
+
+.about .fa-quote-left, .fa-quote-right {
+    color: #adadad;
+    font-size: 2rem;
+} 
+
+.about .fa-quote-left {
+    margin-right: 20px;
+}
+
+.about .fa-quote-right {
+    margin-left: 20px;
+}
+
+.about a {
+    display: block;
+    color: #656565;
+}
+
+.about a:hover {
+    text-decoration: none;
+    color: #007bff;
+}
+
+.team-member {
+    margin: 10px 0;
+}
+
+.fa-brands {
+    margin-right: 5px;
+    /* color: #007bff; */
+}
+.repo {
+    margin-top: 30px;
+}
+
+/* .team-member a:not(:last-child) {
+    margin-bottom: 10px;
+} */
