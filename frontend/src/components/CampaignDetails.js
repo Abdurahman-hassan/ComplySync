@@ -1,34 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useAuth } from '../App';
 import { formatDate } from '../utils';
-
+import useFetch from '../useFetch';
 
 const CampaignDetails = () => {
 
-    const [campaignDetails, setCampaignDetails] = useState(null);
     const { campaignId } = useParams();
-    const { authToken } = useAuth();
-
-    useEffect(() => {
-        const fetchCampaignDetails = async () => {
-            try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/campaigns/${campaignId}`, {
-                    headers: { 'Authorization': `Token ${authToken}` }
-                });
-                console.log(response.data);
-                setCampaignDetails(response.data);
-            } catch (error) {
-                console.error('Error fetching campaign details:', error);
-            }
-        };
-
-        fetchCampaignDetails();
-    }, [campaignId, authToken]);
+    const { data: campaignDetails, error } = useFetch("http://127.0.0.1:8000/api/campaigns/", campaignId);
 
     if (!campaignDetails) {
-        return <div>Loading...</div>;
+        return <div>{error && error}</div>;
     }
 
     return (
