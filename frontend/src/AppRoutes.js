@@ -19,6 +19,7 @@ import Documents from './components/Documents';
 import DocumentDetails from './components/DocumentDetails';
 import UploadDocument from './components/UploadDocument';
 import LandingPage from './components/LandingPage';
+import NotFound from './components/NotFound';
 
 const AppRoutes = ({ username, handleLogout }) => (
     <Routes>
@@ -40,6 +41,7 @@ const AppRoutes = ({ username, handleLogout }) => (
         <Route path="/documents" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Documents /></Layout></ProtectedRoute>} />
         <Route path="/documents/:id" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><DocumentDetails /></Layout></ProtectedRoute>} />
         <Route path="/upload-pdf" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><UploadDocument /></Layout></ProtectedRoute>} />
+        <Route path="*" element={<NotFound />} />
     </Routes>
 );
 
