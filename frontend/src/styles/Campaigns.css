@@ -119,8 +119,35 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.campaign-details h2 {
+/* .campaign-details .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
+}
+
+.campaign-details .update-and-delete {
+    display: flex;
+}
+
+.update-and-delete .update-btn, .update-and-delete .delete-btn {
+    padding: 10px 10px;
+    margin: 0px 0px 0px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-and-delete .update-btn {
+    background-color: #cccccc;
+}
+
+.update-and-delete .delete-btn {
+    background-color: #f00;
+    color: #fff;
+} */
+
+.campaign-details h2 {
     color: #333333;
     font-size: 24px;
 }

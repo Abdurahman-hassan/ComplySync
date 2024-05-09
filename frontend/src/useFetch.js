@@ -8,7 +8,6 @@ const useFetchDetails = (url, id) => {
     const [error, setError] = useState(null);
     const { authToken } = useAuth();
 
-
     useEffect(() => {
             const fetchDetails = async () => {
                 try {
@@ -26,28 +25,6 @@ const useFetchDetails = (url, id) => {
     
             fetchDetails();
     }, [url, id, authToken]);
-
-    // useEffect(() => {
-    //     const abortCont = new AbortController();
-    //     fetch(url, { signal: abortCont.signal })
-    //         .then(res => {
-    //             if (!res.ok) {
-    //                 throw Error('could not fetch the data for that resource');
-    //             }
-    //             return res.json();
-    //         })
-    //         .then(data => {
-    //             setData(data);
-    //             setError(null);
-    //         })
-    //         .catch(err => {
-    //             if (err.name === 'AbortError') {
-    //                 console.log('fetch aborted');
-    //             }
-    //             setError(err.message);
-    //         })
-    //         return () => abortCont.abort();
-    // }, [url]);
 
     return { data, error };
 }
