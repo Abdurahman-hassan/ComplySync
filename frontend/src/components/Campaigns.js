@@ -60,13 +60,19 @@ const Campaigns = () => {
                 <button className='create-campaign-button' onClick={handleCreateCampaign}>Create Campaign</button>
             )}
             </div>
-            {campaigns.map(campaign => (
-                <div key={campaign.id} className='campaign-item' onClick={() => handleCampaignClick(campaign.id)}>
-                    <h3>{campaign.name}</h3>
-                    <p>Start on: {formatDate(campaign.start_date)}</p>
-                    <p>End on: {formatDate(campaign.end_date)}</p>
+            {campaigns.length > 0 ? (
+                campaigns.map(campaign => (
+                    <div key={campaign.id} className='campaign-item' onClick={() => handleCampaignClick(campaign.id)}>
+                        <h3>{campaign.name}</h3>
+                        <p>Start on: {formatDate(campaign.start_date)}</p>
+                        <p>End on: {formatDate(campaign.end_date)}</p>
+                    </div>
+                ))
+            ) : (
+                <div className="no-policies-message">
+                    <h3>There are no campaigns currently; keep tuned for the next one.</h3>
                 </div>
-            ))}
+            )}
             <div className='pagination-buttons'>
                 {prevPage && (
                     <button className='prev-page-button' onClick={handlePrevPage}>Previous Page</button>

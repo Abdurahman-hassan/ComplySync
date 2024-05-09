@@ -65,12 +65,18 @@ const Groups = () => {
                 <button className='create-group-button' onClick={handleCreateGroup}>Create Group</button>
             )}
             </div>
-            {groups.map(group => (
-                <div key={group.id} className='group-item' onClick={() => handleGroupClick(group.id)}>
-                    <h3>{group.group_name}</h3>
-                    <p>Created on: {formatDate(group.created_on)}</p>
+            {groups.length > 0 ? (
+                groups.map(group => (
+                    <div key={group.id} className='group-item' onClick={() => handleGroupClick(group.id)}>
+                        <h3>{group.group_name}</h3>
+                        <p>Created on: {formatDate(group.created_on)}</p>
+                    </div>
+                ))
+            ) : (
+                <div className="no-policies-message">
+                    <h3>You have not been added to any groups yet.</h3>
                 </div>
-            ))}
+            )}
             <div className='pagination-buttons'>
                 {prevPage && (
                     <button className='prev-page-button' onClick={handlePrevPage}>Previous Page</button>
