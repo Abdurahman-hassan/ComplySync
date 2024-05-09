@@ -1,5 +1,5 @@
 // Policies.js
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Policies.css';
@@ -7,43 +7,62 @@ import { useAuth } from '../App';
 
 const Policies = () => {
     const [policies, setPolicies] = useState([]);
-    const [newPolicyCreated, setNewPolicyCreated] = useState(false);
-    const [nextPageUrl, setNextPageUrl] = useState('http://127.0.0.1:8000/api/policies');
+    // const [newPolicyCreated, setNewPolicyCreated] = useState(false);
+    const [nextPage, setNextPage] = useState(null);
+    const [prevPage, setPrevPage] = useState(null);
     const navigate = useNavigate();
     const authToken = localStorage.getItem('authToken');
     const { isAdmin } = useAuth(); // Access the isAdmin state from context
-    const headers = useMemo(() => ({
-        'Authorization': `Token ${authToken}`
-    }), [authToken]);
+    // const headers = useMemo(() => ({
+    //     'Authorization': `Token ${authToken}`
+    // }), [authToken]);
 
-    useEffect(() => {
 
-        const fetchPolicies = async () => {
-            if (!nextPageUrl) return; // Stop if there's no next page
+    const fetchPolicies = useCallback(async (url) => {
 
             try {
-                const response = await axios.get(nextPageUrl, { headers });
-                setPolicies(prevPolicies => [...prevPolicies, ...response.data.results]);
-                setNextPageUrl(response.data.next);
+                const response = await axios.get(url, {
+                    headers: { 'Authorization': `Token ${authToken}` }
+                });
+                console.log(response.data);
+    
+                setPolicies(response.data.results);
+                setNextPage(response.data.next); // Save the next page URL
+                setPrevPage(response.data.previous); // Save the previous page URL
             } catch (error) {
                 console.error('Error fetching policies:', error);
             }
-        };
 
-        fetchPolicies();
-    }, [authToken, nextPageUrl, newPolicyCreated, headers]);
+    }, [authToken]);
+
+
+    useEffect(() => {
+        fetchPolicies('http://127.0.0.1:8000/api/policies/');
+    }, [fetchPolicies]);
 
     const handleCreatePolicy = () => {
         navigate('/create-policy');
-        setNewPolicyCreated(true);
+        // setNewPolicyCreated(true);
+    };
+
+    const handleNextPage = () => {
+        if (nextPage) {
+            fetchPolicies(nextPage);
+        }
+    };
+
+    const handlePrevPage = () => {
+        if (prevPage) {
+            fetchPolicies(prevPage);
+        }
     };
 
     return (
-        <div className='policies-container'>
+        <div className='policies-list'>
             <div className="policies-header">
                 <h2>Policies Page</h2>
                 { isAdmin && (
-                <button onClick={handleCreatePolicy} className='create-policy-btn'>
+                <button onClick={handleCreatePolicy} className='create-policy-button'>
                     Create Policy
                 </button>
             ) }
@@ -60,6 +79,14 @@ const Policies = () => {
                     <h3>There are no policies now, enjoy the silence.</h3>
                 </div>
             )}
+            <div className='pagination-buttons'>
+                {prevPage && (
+                    <button className='prev-page-button' onClick={handlePrevPage}>Previous Page</button>
+                )}
+                {nextPage && (
+                    <button className='next-page-button' onClick={handleNextPage}>Next Page</button>
+                )}
+            </div>
         </div>
     );
 };
