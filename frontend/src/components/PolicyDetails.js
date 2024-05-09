@@ -24,7 +24,7 @@ const PolicyDetails = () => {
     }
 
     return (
-        <div className='policy-details-container'>
+        <div className='policy-details'>
             {error && <p>{error}</p>}
             <div className="head">
                 <h2>{policy.base_title}</h2>

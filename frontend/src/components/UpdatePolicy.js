@@ -62,48 +62,47 @@ const UpdatePolicy = () => {
     };
 
     return (
-        <div className='create-policy-container'>
+        <form onSubmit={handleSubmit} className='create-policy-form'>
             <h2>Update Policy</h2>
             {error && <p>{error}</p>}
-            <form onSubmit={handleSubmit} className='create-policy-form'>
-                <label>
-                    Title:
-                    <input
-                        type="text"
-                        name="base_title"
-                        value={base_title}
-                        onChange={(e) => setBaseTitle(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Minimum Read Time (minutes):
-                    <input
-                        type="number"
-                        name="min_read_time"
-                        value={min_read_time}
-                        onChange={(e) => setMinReadTime(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Allow Download:
-                    <input
-                        type="checkbox"
-                        name="allow_download"
-                        checked={allow_download}
-                        onChange={(e) => setAllowDownload(e.target.checked)}
-                    />
-                </label>
-                <label>
-                    Description:
-                    <textarea
-                        name="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </label>
-                <button type="submit">Update</button>
-            </form>
-        </div>
+            <label>
+                Title:
+                <input
+                    type="text"
+                    name="base_title"
+                    value={base_title}
+                    onChange={(e) => setBaseTitle(e.target.value)}
+                />
+            </label>
+            <label>
+                Minimum Read Time (minutes):
+                <input
+                    type="number"
+                    name="min_read_time"
+                    min="1"
+                    value={min_read_time}
+                    onChange={(e) => setMinReadTime(e.target.value)}
+                />
+            </label>
+            <label>
+                Allow Download:
+                <input
+                    type="checkbox"
+                    name="allow_download"
+                    checked={allow_download}
+                    onChange={(e) => setAllowDownload(e.target.checked)}
+                />
+            </label>
+            <label>
+                Description:
+                <textarea
+                    name="description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                />
+            </label>
+            <button className='create-policy-submit' type="submit">Update</button>
+        </form>
     );
 
 }

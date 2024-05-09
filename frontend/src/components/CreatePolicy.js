@@ -45,47 +45,47 @@ const CreatePolicy = () => {
     };
 
     return (
-        <div className='create-policy-container'>
-            <h2>Create Policy Page</h2>
-            <form onSubmit={handleSubmit} className='create-policy-form'>
-                <label>
-                    Title:
-                    <input
-                        type="text"
-                        name="base_title"
-                        value={formData.base_title}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Minimum Read Time (minutes):
-                    <input
-                        type="number"
-                        name="min_read_time"
-                        value={formData.min_read_time}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Allow Download:
-                    <input
-                        type="checkbox"
-                        name="allow_download"
-                        checked={formData.allow_download}
-                        onChange={handleChange}
-                    />
-                </label>
-                <label>
-                    Description:
-                    <textarea
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                    />
-                </label>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
+
+        <form onSubmit={handleSubmit} className='create-policy-form'>
+            <h2>Create Policy</h2>
+            <label>
+                Title:
+                <input
+                    type="text"
+                    name="base_title"
+                    value={formData.base_title}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
+                Minimum Read Time (minutes):
+                <input
+                    type="number"
+                    name="min_read_time"
+                    min="1"
+                    value={formData.min_read_time}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
+                Allow Download:
+                <input
+                    type="checkbox"
+                    name="allow_download"
+                    checked={formData.allow_download}
+                    onChange={handleChange}
+                />
+            </label>
+            <label>
+                Description:
+                <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                />
+            </label>
+            <button className='create-policy-submit' type="submit">Submit</button>
+        </form>
     );
 }
 

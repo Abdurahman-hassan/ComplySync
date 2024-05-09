@@ -1,4 +1,4 @@
-.create-policy-container {
+/* .create-policy-container {
     margin: 20px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -47,4 +47,56 @@
 
 .create-policy-form button:hover {
     background-color: #0056b3;
+} */
+
+:root {
+    --main-blue: #007bff;
+    --main-dark-blue: #0056b3;
 }
+
+.create-policy-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0px auto;
+    padding: 20px;
+    background: #f3f3f3;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.create-policy-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.create-policy-form label {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.create-policy-form input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.create-policy-submit {
+    width: 100%;
+    padding: 10px;
+    background: var(--main-blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.create-policy-submit:hover {
+    background: var(--main-dark-blue);
+}
+
