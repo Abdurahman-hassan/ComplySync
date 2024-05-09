@@ -1,3 +1,7 @@
+:root {
+    --main-blue: #007bff;
+    --main-dark-blue: #0056b3;
+}
 
 .create-group-form {
     max-width: 500px;
@@ -50,7 +54,7 @@
 .create-group-submit {
     width: 100%;
     padding: 10px;
-    background: #007bff;
+    background: var(--main-blue);
     color: white;
     border: none;
     border-radius: 4px;
@@ -58,5 +62,5 @@
 }
 
 .create-group-submit:hover {
-    background: #0056b3;
+    background: var(--main-dark-blue);
 }

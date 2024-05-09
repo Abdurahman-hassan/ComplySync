@@ -1,6 +1,10 @@
+:root {
+    --main-blue: #007bff;
+    --main-dark-blue: #0056b3;
+}
+
 .campaigns-list {
-    max-width: 600px;
-    margin: 0 auto;
+    margin: 20px;
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 8px;
@@ -19,7 +23,7 @@
     padding: 10px;
     font-size: 16px;
     color: #ffffff;
-    background-color: #337ab7;
+    background-color: var(--main-blue);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -27,7 +31,7 @@
 }
 
 .create-campaign-button:hover {
-    background-color: #286090;
+    background-color: var(--main-dark-blue);
 }
 
 .campaign-item {
@@ -60,7 +64,7 @@
     padding: 10px 20px;
     font-size: 16px;
     color: #ffffff;
-    background-color: #337ab7;
+    background-color: var(--main-blue);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -68,7 +72,7 @@
 }
 
 .prev-page-button:hover, .next-page-button:hover {
-    background-color: #286090;
+    background-color: var(--main-dark-blue);
 }
 
 .prev-page-button[disabled], .next-page-button[disabled] {
@@ -99,7 +103,7 @@
     padding: 10px 0;
     font-size: 16px;
     color: #ffffff;
-    background-color: #337ab7;
+    background-color: var(--main-blue);
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -107,12 +111,11 @@
 }
 
 .create-campaign-form button:hover {
-    background-color: #286090;
+    background-color: var(--main-dark-blue);
 }
 
 .campaign-details {
-    max-width: 600px;
-    margin: 20px auto;
+    margin: 20px;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 8px;
