@@ -47,6 +47,7 @@ const Login = () => {
         <div>
             <div className="signup-container">
                 <form className="signup-form" onSubmit={handleSubmit}>
+                    <h1>ComplySync</h1>
                     <input
                         type="email"
                         name="email"

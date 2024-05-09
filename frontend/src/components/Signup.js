@@ -5,7 +5,7 @@ import RegistrationSuccess from './RegistrationSuccess';
 const Signup = () => {
 
     const [formData, setFormData] = useState({
-        // name: '',
+        name: '',
         email: '',
         password: '',
         re_password: '',
@@ -30,7 +30,7 @@ const Signup = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                // name: formData.name,
+                name: formData.name,
                 email: formData.email,
                 password: formData.password,
                 re_password: formData.re_password,
@@ -57,14 +57,15 @@ const Signup = () => {
     return (
         <div className="signup-container">
             <form className='signup-form' onSubmit={handleSubmit}>
-                {/* <input
+                <h1>ComplySync</h1>
+                <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
                     placeholder="Name"
                     required
-                /> */}
+                />
                 <input
                     type="email"
                     name="email"
