@@ -29,7 +29,7 @@ const LandingPage = () => {
                 </div>
             </nav>
             <header className="header">
-                <img src="/cover_illustration.svg" alt="Cover" className="cover-image" />
+                <img src={`${process.env.PUBLIC_URL}/cover_illustration.svg`} alt="Cover" className="cover-image" />
                 <div className="project-description">
                     <h1>ComplySync</h1>
                     <p>Seamless policy integration<br />for easy access</p>
@@ -39,21 +39,21 @@ const LandingPage = () => {
 
             <section id="features" className="features">
                 <div className="feature">
-                    <img src="/policies_feature.png" alt="Policies Feature" />
+                    <img src={`${process.env.PUBLIC_URL}/policies_feature.png`} alt="Policies Feature" />
                     <div className="feature-description">
                         <h2>Policies</h2>
                         <p>Clearly define and manage your company policies. Create new policies, assign descriptive titles, and provide detailed explanations for easy employee understanding.</p>
                     </div>
                 </div>
                 <div className="feature">
-                <img src="/groups_feature.png" alt="Groups Feature" className="group-image" />
+                <img src={`${process.env.PUBLIC_URL}/groups_feature.png`} alt="Groups Feature" className="group-image" />
                     <div className="feature-description group-description">
                         <h2>Groups</h2>
                         <p>Organize your workforce effectively. Create groups based on departments, roles, or any other relevant criteria. This allows targeted communication, ensuring employees only see policies relevant to their function.</p>
                     </div>
                 </div>
                 <div className="feature">
-                    <img src="/campaigns_feature.png" alt="Campaigns Feature" />
+                    <img src={`${process.env.PUBLIC_URL}/campaigns_feature.png`} alt="Campaigns Feature" />
                     <div className="feature-description">
                         <h2>Campaigns</h2>
                         <p>Simplify policy rollouts with targeted campaigns. Designate specific campaigns, define their duration, and select the relevant groups and policies to include. Once a campaign is launched,  employees are automatically notified of the new or updated policies that apply to them.</p>
