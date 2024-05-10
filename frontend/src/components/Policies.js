@@ -60,7 +60,7 @@ const Policies = () => {
     return (
         <div className='policies-list'>
             <div className="policies-header">
-                <h2>Policies Page</h2>
+                <h2>Policies</h2>
                 { isAdmin && (
                 <button onClick={handleCreatePolicy} className='create-policy-button'>
                     Create Policy
