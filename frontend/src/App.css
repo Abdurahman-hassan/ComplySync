@@ -139,12 +139,18 @@ body {
 }
 
 .navbar .back-btn {
+  border-radius: 5px;
   margin: 0;
-  padding: 5px;
+  padding: 10px;
   border: none;
   background-color: var(--main-blue);
   color: #fff;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .back-btn:hover {
+  background-color: var(--main-dark-blue);
 }
 
 .home {

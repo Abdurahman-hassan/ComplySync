@@ -1,7 +1,3 @@
-/* .landing-page {
-    font-family: Arial, sans-serif;
-    
-} */
 
 a {
     text-decoration: none;
@@ -98,7 +94,7 @@ a {
 }
 
 .feature img {
-    max-width: 66%;
+    max-width: 60%;
     height: auto;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
 }
@@ -106,6 +102,8 @@ a {
 .feature-description p {
     font-size: 0.9rem;
     color: #adadad;
+    width: 80%;
+    margin: auto;
 }
 
 .about {
@@ -117,7 +115,7 @@ a {
 }
 
 .about p {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     color: #adadad;
     width: 80vw;
     margin: 50px 0px 40px;
@@ -161,3 +159,102 @@ a {
 /* .team-member a:not(:last-child) {
     margin-bottom: 10px;
 } */
+
+
+/************** Media Queries  ***************/
+
+/* Existing styles */
+
+/* Media query for tablets and smaller devices */
+@media (max-width: 768px) {
+    .navigation {
+        height: auto;
+        padding: 15px;
+    }
+
+    .navigation .logo {
+        font-size: 1rem;
+    }
+
+    .navigation a {
+        margin: 0 5px;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 15px;
+    }
+
+    .project-description h1 {
+        font-size: 3rem;
+    }
+
+    .cover-image {
+        max-width: 70%;
+    }
+
+    .btn-deployed-app {
+        width: 80%;
+    }
+
+    .features {
+        padding: 20px;
+    }
+
+    .feature {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .feature img {
+        max-width: 80%;
+    }
+
+    .feature-description p {
+        width: 100%;
+        margin: 20px auto;
+    }
+
+    .about {
+        padding: 20px;
+    }
+
+    .about p {
+        width: 90vw;
+        margin: 30px 0;
+    }
+
+    .team-member {
+        margin: 10px auto;
+    }
+
+    .fa-brands {
+        margin-right: 3px;
+    }
+}
+
+/* Media query for mobile devices */
+@media (max-width: 480px) {
+    .project-description h1 {
+        font-size: 2.5rem;
+    }
+
+    .cover-image {
+        max-width: 90%;
+    }
+
+    .btn-deployed-app {
+        width: 90%;
+    }
+
+    .feature img {
+        max-width: 90%;
+    }
+
+    .about p {
+        width: 95vw;
+    }
+}
+
