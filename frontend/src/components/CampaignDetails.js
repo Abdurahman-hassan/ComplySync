@@ -28,8 +28,8 @@ const CampaignDetails = () => {
 
     return (
         <div className='campaign-details'>
+            <div>{error && error}</div>
             <div className="head">
-                <div>{error && error}</div>;
                 <h2>{campaignDetails.name}</h2>
                 <div className="update-and-delete">
                     {isAdmin && <button className='update-btn' onClick={() => navigate(`/campaigns/${campaignId}/update`)} >Update</button>}

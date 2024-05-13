@@ -74,7 +74,7 @@ const Documents = () => {
                     <h2>Documents</h2>
                     { isAdmin && (
                     <button onClick={handleUploadDocument} className='create-policy-button'>
-                        Create Policy
+                        Uplaod Document
                     </button>
                 ) }
                 </div>

@@ -55,7 +55,7 @@ const Groups = () => {
     };
 
     const handleCreateGroup = () => {
-        navigate('/create-group');
+        navigate('/groups/create');
     };
 
     const handleNextPage = () => {

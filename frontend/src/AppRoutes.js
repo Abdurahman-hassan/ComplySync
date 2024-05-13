@@ -34,14 +34,14 @@ const AppRoutes = ({ username, handleLogout }) => (
         <Route path="/emailuploader" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><EmailUploader /></Layout></ProtectedRoute>} />
         <Route path="/policies" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Policies /></Layout></ProtectedRoute>} />
         <Route path="/campaigns" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Campaigns /></Layout></ProtectedRoute>} />
-        <Route path="/create-campaign" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreateCampaign /></Layout></ProtectedRoute>} />
+        <Route path="/campaigns/create" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreateCampaign /></Layout></ProtectedRoute>} />
         <Route path="/campaigns/:campaignId" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CampaignDetails /></Layout></ProtectedRoute>} />
         <Route path="/campaigns/:campaignId/update" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><UpdateCampaign /></Layout></ProtectedRoute>} />
-        <Route path="/create-policy" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreatePolicy /></Layout></ProtectedRoute>} />
+        <Route path="/policies/create" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreatePolicy /></Layout></ProtectedRoute>} />
         <Route path="/policies/:id" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><PolicyDetails /></Layout></ProtectedRoute>} />
         <Route path="/policies/:id/update" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><UpdatePolicy /></Layout></ProtectedRoute>} />
         <Route path="/groups" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Groups /></Layout></ProtectedRoute>} />
-        <Route path="/create-group" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreateGroup /></Layout></ProtectedRoute>} />
+        <Route path="/groups/create" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreateGroup /></Layout></ProtectedRoute>} />
         <Route path="/groups/:groupId" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><GroupDetails /></Layout></ProtectedRoute>} />
         <Route path="/groups/:groupId/update" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><UpdateGroup /></Layout></ProtectedRoute>} />
         <Route path="/documents" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Documents /></Layout></ProtectedRoute>} />

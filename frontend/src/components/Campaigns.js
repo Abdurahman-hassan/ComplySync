@@ -50,7 +50,7 @@ const Campaigns = () => {
     };
 
     const handleCreateCampaign = () => {
-        navigate('/create-campaign');
+        navigate('/campaigns/create');
     };
 
     const handleNextPage = () => {

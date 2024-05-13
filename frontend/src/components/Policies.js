@@ -53,7 +53,7 @@ const Policies = () => {
     }, [fetchPolicies]);
 
     const handleCreatePolicy = () => {
-        navigate('/create-policy');
+        navigate('/policies/create');
         // setNewPolicyCreated(true);
     };
 
