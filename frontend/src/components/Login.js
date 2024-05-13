@@ -38,7 +38,7 @@ const Login = () => {
             const token = data.auth_token;
 
             handleLogin(token);
-            navigate('/home');
+            navigate('/policies');
         } catch (error) {
             console.error(error.message);
             setError(error.message);

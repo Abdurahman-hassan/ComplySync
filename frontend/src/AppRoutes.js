@@ -3,7 +3,6 @@ import ProtectedRoute from './ProtectedRoute';
 import Layout from './components/Layout';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import Home from './components/Home';
 import ActivationPage from './components/ActivationPage';
 import EmailUploader from './components/EmailUploader';
 import Policies from './components/Policies';
@@ -30,7 +29,6 @@ const AppRoutes = ({ username, handleLogout }) => (
         <Route path="/auth/activate" element={<ActivationPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/home" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Home /></Layout></ProtectedRoute>} />
         <Route path="/emailuploader" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><EmailUploader /></Layout></ProtectedRoute>} />
         <Route path="/policies" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Policies /></Layout></ProtectedRoute>} />
         <Route path="/campaigns" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Campaigns /></Layout></ProtectedRoute>} />
