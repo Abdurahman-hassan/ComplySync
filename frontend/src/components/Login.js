@@ -1,6 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../App';
+import axios from 'axios';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Login = () => {
 
@@ -8,6 +10,8 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const { handleLogin } = useContext(AuthContext);
+    const [isLoading, setIsLoading] = useState(false);
+    const minimumLoadingTime = 500;
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,32 +19,38 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const startTime = performance.now();
+        setIsLoading(true);
+        try {
+            const formData = {
+                email: e.target.email.value, // Assuming email input has a name="email"
+                password: e.target.password.value, // Assuming password input has a name="password"
+            };
 
-        fetch('http://127.0.0.1:8000/api/auth/token/login/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email: formData.email,
-                password: formData.password,
-            }),
-        }).then(response => {
-            console.log(response);
-            if (!response.ok) {
-                throw new Error('Something went wrong!');
-            }
-            return response.json();
+            const response = await axios.post('http://127.0.0.1:8000/api/auth/token/login/', formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
 
-        }).then(data => {
+            const data = response.data;
             console.log(data);
             const token = data.auth_token;
+
             handleLogin(token);
             navigate('/home');
-        }).catch(error => {
-            console.log(error.message);
+        } catch (error) {
+            console.error(error.message);
             setError(error.message);
-        });
+        } finally {
+            const elapsedTime = performance.now() - startTime;
+            if (elapsedTime < minimumLoadingTime) {
+                const remainingTime = minimumLoadingTime - elapsedTime;
+                setTimeout(() => setIsLoading(false), remainingTime);
+            } else {
+                setIsLoading(false);
+            }
+        }
     };
 
     return (
@@ -66,8 +76,8 @@ const Login = () => {
                     />
 
                     {/* Display error message */}
-                    {error && <p className="error-message">{ error }</p>}
-                    <button type="submit">Log In</button>
+                    {error && <p className="error-message">{error}</p>}
+                    <button type="submit" disabled={isLoading}>{isLoading ? <ThreeDots visible={true} height="50" width="50" color="#fff" radius="9" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="" /> : 'Login'}</button>
                 </form>
                 <Link to="/signup">Don't have an account? Sign up</Link>
             </div>
