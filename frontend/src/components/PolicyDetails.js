@@ -4,6 +4,7 @@ import '../styles/PolicyDetails.css';
 import useFetch from '../useFetch';
 import { useAuth } from '../App';
 import { useDelete } from '../utils';
+import LoadingSpinner from './LoadingSpinner';
 
 const PolicyDetails = () => {
 
@@ -20,7 +21,7 @@ const PolicyDetails = () => {
         console.log(deleteError);
     }
     if (!policy) {
-        return <div>Loading...</div>;
+        return <div><LoadingSpinner /></div>;
     }
 
     return (

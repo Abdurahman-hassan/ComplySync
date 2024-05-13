@@ -4,6 +4,7 @@ import { formatDate } from '../utils';
 import useFetch from '../useFetch';
 import { useDelete } from '../utils';
 import { useAuth } from '../App';
+import LoadingSpinner from './LoadingSpinner';
 
 const CampaignDetails = () => {
 
@@ -22,12 +23,13 @@ const CampaignDetails = () => {
     }
 
     if (!campaignDetails) {
-        return <div>{error && error}</div>;
+        return <div><LoadingSpinner /></div>;
     }
 
     return (
         <div className='campaign-details'>
             <div className="head">
+                <div>{error && error}</div>;
                 <h2>{campaignDetails.name}</h2>
                 <div className="update-and-delete">
                     {isAdmin && <button className='update-btn' onClick={() => navigate(`/campaigns/${campaignId}/update`)} >Update</button>}
