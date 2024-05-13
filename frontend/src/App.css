@@ -61,6 +61,9 @@ body {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Change background color on hover for the submit button */
@@ -194,3 +197,9 @@ body {
   color: #fff;
 }
 
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35vh;
+}
