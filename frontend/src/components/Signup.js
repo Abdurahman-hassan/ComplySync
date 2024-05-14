@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from'react-router-dom';
+import { Link } from 'react-router-dom';
 import RegistrationSuccess from './RegistrationSuccess';
+import axios from 'axios';
+import { ThreeDots } from 'react-loader-spinner';
 
 const Signup = () => {
 
@@ -13,6 +15,8 @@ const Signup = () => {
     const [isRegistered, setIsRegistered] = useState(false);
     const [userEmail, setUserEmail] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const minimumLoadingTime = 500;
 
     const handleInputChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,34 +24,37 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (formData.password !== formData.re_password) {
-            alert('Passwords do not match!');
+            setError("Passwords don't match!");
             return;
         }
-        fetch('http://127.0.0.1:8000/api/auth/users/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: formData.name,
-                email: formData.email,
-                password: formData.password,
-                re_password: formData.re_password,
-            }),
-        }).then(response => {
-            // console.log(response);
-            if (!response.ok) {
-                throw new Error('Something went wrong!');
-            }
+        const startTime = performance.now();
+        setIsLoading(true); // Set loading state to true before fetching
+        setError(null); // Clear any previous error
+
+        try {
+            await axios.post('http://127.0.0.1:8000/api/auth/users/', formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
             setIsRegistered(true);
             setUserEmail(formData.email);
-            // return response.json();
 
-        }).catch(error => {
-            console.log(error);
+        } catch (error) {
+            console.error(error.message);
             setError("Registration failed. Please try again.");
-        });
+        } finally {
+            const elapsedTime = performance.now() - startTime;
+            if (elapsedTime < minimumLoadingTime) {
+                const remainingTime = minimumLoadingTime - elapsedTime;
+                setTimeout(() => setIsLoading(false), remainingTime);
+            } else {
+                setIsLoading(false);
+            }
+        }
     };
 
     if (isRegistered) {
@@ -92,9 +99,9 @@ const Signup = () => {
                 />
 
                 {/* Display error message */}
-                {error && <p className="error-message">{ error }</p>}
+                {error && <p className="error-message">{error}</p>}
 
-                <button type="submit">Sign Up</button>
+                <button type="submit" disabled={isLoading}>{isLoading ? <ThreeDots visible={true} height="50" width="50" color="#fff" radius="9" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="" /> : 'Sign Up'}</button>
             </form>
             <Link to="/login">Already have an account? Login</Link>
         </div>

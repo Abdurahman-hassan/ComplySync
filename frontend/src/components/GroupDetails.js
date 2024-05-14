@@ -4,6 +4,7 @@ import { formatDate } from '../utils';
 import useFetch from '../useFetch';
 import { useAuth } from '../App';
 import { useDelete } from '../utils';
+import LoadingSpinner from './LoadingSpinner';
 
 const GroupDetails = () => {
 
@@ -22,7 +23,7 @@ const GroupDetails = () => {
     }
 
     if (!groupDetails) {
-        return <div>Loading...</div>;
+        return <div><LoadingSpinner /></div>;
     }
 
     return (

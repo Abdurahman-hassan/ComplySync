@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../App';
 import  '../styles/Documents.css';
 import { formatDate } from '../utils';
+import LoadingSpinner from './LoadingSpinner';
 
 const Documents = () => {
 
@@ -12,9 +13,12 @@ const Documents = () => {
     const [documents, setDocuments] = useState([]);
     const [nextPage, setNextPage] = useState(null);
     const [prevPage, setPrevPage] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const minimumLoadingTime = 500;
 
     const fetchDocuments = useCallback(async (url) => {
-
+        const startTime = performance.now();
+        setIsLoading(true);
         try {
             const response = await axios.get(url, {
                 headers: { 'Authorization': `Token ${authToken}` }
@@ -26,6 +30,14 @@ const Documents = () => {
             setPrevPage(response.data.previous); // Save the previous page URL
         } catch (error) {
             console.error('Error fetching documents:', error);
+        } finally {
+            const elapsedTime = performance.now() - startTime;
+            if (elapsedTime < minimumLoadingTime) {
+                const remainingTime = minimumLoadingTime - elapsedTime;
+                setTimeout(() => setIsLoading(false), remainingTime);
+            } else {
+                setIsLoading(false);
+            }
         }
 
     }, [authToken]);
@@ -53,36 +65,42 @@ const Documents = () => {
     };
 
     return (
-        <div className='documents-list'>
-            <div className="documents-header">
-                <h2>Documents</h2>
-                { isAdmin && (
-                <button onClick={handleUploadDocument} className='create-policy-button'>
-                    Create Policy
-                </button>
-            ) }
-            </div>
-            {documents.length > 0 ? (
-                documents.map((document, index) => (
-                    <div key={index} onClick={() => navigate(`/documents/${document.id}`)} className='document-item'>
-                        <h3>{document.localized_title}</h3>
-                        <p>{formatDate(document.last_updated)}</p>
-                    </div>
-                ))
+        <>
+            {isLoading ? (
+                <LoadingSpinner />
             ) : (
-                <div className="no-documents-message">
-                    <h3>There are no documents now, enjoy the silence.</h3>
+            <div className='documents-list'>
+                <div className="documents-header">
+                    <h2>Documents</h2>
+                    { isAdmin && (
+                    <button onClick={handleUploadDocument} className='create-policy-button'>
+                        Uplaod Document
+                    </button>
+                ) }
                 </div>
-            )}
-            <div className='pagination-buttons'>
-                {prevPage && (
-                    <button className='prev-page-button' onClick={handlePrevPage}>Previous Page</button>
+                {documents.length > 0 ? (
+                    documents.map((document, index) => (
+                        <div key={index} onClick={() => navigate(`/documents/${document.id}`)} className='document-item'>
+                            <h3>{document.localized_title}</h3>
+                            <p>{formatDate(document.last_updated)}</p>
+                        </div>
+                    ))
+                ) : (
+                    <div className="no-documents-message">
+                        <h3>There are no documents now, enjoy the silence.</h3>
+                    </div>
                 )}
-                {nextPage && (
-                    <button className='next-page-button' onClick={handleNextPage}>Next Page</button>
-                )}
+                <div className='pagination-buttons'>
+                    {prevPage && (
+                        <button className='prev-page-button' onClick={handlePrevPage}>Previous Page</button>
+                    )}
+                    {nextPage && (
+                        <button className='next-page-button' onClick={handleNextPage}>Next Page</button>
+                    )}
+                </div>
             </div>
-        </div>
+            )}
+        </>
     );
 };
 

@@ -34,7 +34,6 @@ const Layout = ({ children, username, handleLogout }) => {
         <div className="app">
             <div className="sidebar">
                 <h1>ComplySync</h1>
-                <NavLink to="/home" className={getActiveLinkClass}><button>Home</button></NavLink>
                 <NavLink to="/policies" className={getActiveLinkClass}><button>Policies</button></NavLink>
                 <NavLink to="/documents" className={getActiveLinkClass}><button>Documents</button></NavLink>
                 <NavLink to="/groups" className={getActiveLinkClass}><button>Groups</button></NavLink>

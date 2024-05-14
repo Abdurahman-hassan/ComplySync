@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../App';
 import { formatDate } from '../utils';
 import '../styles/Groups.css';
+import LoadingSpinner from './LoadingSpinner';
 
 const Groups = () => {
 
@@ -12,8 +13,12 @@ const Groups = () => {
     const [prevPage, setPrevPage] = useState(null);
     const navigate = useNavigate();
     const { authToken, isAdmin } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+    const minimumLoadingTime = 500;
 
     const fetchGroups = useCallback(async (url) => {
+        const startTime = performance.now();
+        setIsLoading(true);
         try {
             const response = await axios.get(url, {
                 headers: { 'Authorization': `Token ${authToken}` }
@@ -30,6 +35,14 @@ const Groups = () => {
             setPrevPage(response.data.previous); // Save the previous page URL
         } catch (error) {
             console.error('Error fetching groups:', error);
+        } finally {
+            const elapsedTime = performance.now() - startTime;
+            if (elapsedTime < minimumLoadingTime) {
+                const remainingTime = minimumLoadingTime - elapsedTime;
+                setTimeout(() => setIsLoading(false), remainingTime);
+            } else {
+                setIsLoading(false);
+            }
         }
     }, [authToken]);
 
@@ -42,7 +55,7 @@ const Groups = () => {
     };
 
     const handleCreateGroup = () => {
-        navigate('/create-group');
+        navigate('/groups/create');
     };
 
     const handleNextPage = () => {
@@ -58,34 +71,40 @@ const Groups = () => {
     };
 
     return (
-        <div className='groups-list'>
-            <div className="groups-header">
-                <h2>Groups</h2>
-                {isAdmin && (
-                <button className='create-group-button' onClick={handleCreateGroup}>Create Group</button>
-            )}
-            </div>
-            {groups.length > 0 ? (
-                groups.map(group => (
-                    <div key={group.id} className='group-item' onClick={() => handleGroupClick(group.id)}>
-                        <h3>{group.group_name}</h3>
-                        <p>Created on: {formatDate(group.created_on)}</p>
-                    </div>
-                ))
+        <>
+            {isLoading ? (
+                <LoadingSpinner />
             ) : (
-                <div className="no-policies-message">
-                    <h3>You have not been added to any groups yet.</h3>
+                <div className='groups-list'>
+                <div className="groups-header">
+                    <h2>Groups</h2>
+                    {isAdmin && (
+                    <button className='create-group-button' onClick={handleCreateGroup}>Create Group</button>
+                )}
                 </div>
-            )}
-            <div className='pagination-buttons'>
-                {prevPage && (
-                    <button className='prev-page-button' onClick={handlePrevPage}>Previous Page</button>
+                {groups.length > 0 ? (
+                    groups.map(group => (
+                        <div key={group.id} className='group-item' onClick={() => handleGroupClick(group.id)}>
+                            <h3>{group.group_name}</h3>
+                            <p>Created on: {formatDate(group.created_on)}</p>
+                        </div>
+                    ))
+                ) : (
+                    <div className="no-policies-message">
+                        <h3>You have not been added to any groups yet.</h3>
+                    </div>
                 )}
-                {nextPage && (
-                    <button className='next-page-button' onClick={handleNextPage}>Next Page</button>
-                )}
+                <div className='pagination-buttons'>
+                    {prevPage && (
+                        <button className='prev-page-button' onClick={handlePrevPage}>Previous Page</button>
+                    )}
+                    {nextPage && (
+                        <button className='next-page-button' onClick={handleNextPage}>Next Page</button>
+                    )}
+                </div>
             </div>
-        </div>
+            )}
+        </>
     );
 }
 

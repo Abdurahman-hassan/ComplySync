@@ -4,6 +4,7 @@ import axios from 'axios';
 import useFetch from '../useFetch';
 import { useAuth } from '../App';
 import '../styles/Documents.css'
+import LoadingSpinner from './LoadingSpinner';
 
 const DocumentDetails = () => {
 
@@ -43,7 +44,7 @@ const DocumentDetails = () => {
     }, [id, authToken, document]);
 
     if (!document) {
-        return <div>Loading...</div>;
+        return <div><LoadingSpinner /></div>;
     }
 
     return (
