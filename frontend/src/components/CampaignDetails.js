@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { formatDate } from '../utils';
 import useFetch from '../useFetch';
 import { useDelete } from '../utils';
@@ -42,7 +42,7 @@ const CampaignDetails = () => {
             <h4>Policies</h4>
                 {campaignDetails.policies.map(policy => (
                     <div key={policy.id}>
-                        <p>{policy.base_title}</p>
+                        <NavLink to={`/policies/${policy.id}`}><p>{policy.base_title}</p></NavLink>
                     </div>
                 ))}
             </div>
