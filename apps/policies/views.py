@@ -36,7 +36,7 @@ class PolicyViewSet(viewsets.ModelViewSet):
 
 
 class LanguageViewSet(viewsets.ModelViewSet):
-    queryset = Language.objects.all()
+    queryset = Language.objects.all().order_by('-id')
     serializer_class = LanguageSerializer
     permission_classes = [IsAdminOrRestrictedOwnData]
 

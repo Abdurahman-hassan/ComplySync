@@ -70,6 +70,9 @@ class Policy(models.Model):
     def __str__(self):
         return self.base_title
 
+    class Meta:
+        ordering = ['-id']
+
 
 class Language(models.Model):
     policy = models.ForeignKey(Policy, related_name='languages', on_delete=models.CASCADE)
