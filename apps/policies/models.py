@@ -83,3 +83,6 @@ class Language(models.Model):
 
     def __str__(self):
         return f"{self.localized_title} ({self.get_language_display()})"
+
+    class Meta:
+        ordering = ['-id']
