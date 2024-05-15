@@ -3,16 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload PDF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            color: #5a5a5a;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .message {
+            margin-bottom: 20px;
+            padding: 10px;
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .success {
+            background-color: #4CAF50;
+        }
+        .error {
+            background-color: #f44336;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 <h1>Upload a PDF</h1>
-{% if error %}
-    <p style="color: red;">{{ error }}</p>
+{% if messages %}
+    {% for message in messages %}
+    <div class="message {{ message.tags }}">
+        {{ message|safe }}
+    </div>
+    {% endfor %}
 {% endif %}
-<form method="post" enctype="multipart/form-data">
+<form method="post" enctype="multipart/form-data" id="uploadForm">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Upload PDF</button>
 </form>
+<script>
+    document.getElementById('uploadForm').onsubmit = function(e) {
+        var fileInput = document.querySelector('input[type="file"]');
+        var filePath = fileInput.value;
+        var allowedExtensions = /(\.pdf)$/i;
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Please upload a file with .pdf extension.');
+            fileInput.value = ''; // Clear the file input for new file selection
+            e.preventDefault(); // Prevent form submission
+        }
+    };
+</script>
 </body>
 </html>

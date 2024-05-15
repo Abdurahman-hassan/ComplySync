@@ -2,6 +2,7 @@ import logging
 
 import boto3
 from django.conf import settings
+from django.contrib import messages
 from django.http import JsonResponse
 from django.views.generic.edit import FormView
 from django_filters.rest_framework import DjangoFilterBackend
@@ -106,15 +107,18 @@ class UploadLanguageDocumentView(FormView):
     template_name = 'upload_language.html'
     form_class = LanguageForm
 
-    # success_url = reverse_lazy('upload_pdf')
-
     def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
         language_instance = form.save()
-        return JsonResponse({'success': True, 'url': language_instance.document_file.url}, status=201)
+        messages.success(self.request, 'Successfully uploaded!')
+        return super().form_valid(form)
 
     def form_invalid(self, form):
-        # This method is called when form data isn’t valid.
-        # It returns an HttpResponse with the form errors.
-        return JsonResponse({'errors': form.errors}, status=400)
+        # Iterate over the form errors (if there are multiple)
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"Error in {field}: {error}")
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        # Redirect to the same page after POST to display the messages
+        return self.request.path
