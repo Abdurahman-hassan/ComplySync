@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: #f4f4f4;
+        }
+        .email-container { 
+            max-width: 600px; 
+            margin: 20px auto; 
+            background-color: #ffffff; 
+            border: 1px solid #dedede; 
+            border-radius: 8px; 
+            overflow: hidden;
+        }
+        .header {
+            background-color: #6441a5; 
+            color: #ffffff; 
+            padding: 10px 20px; 
+            text-align: center; 
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px; 
+            line-height: 1.5; 
+            color: #333333;
+        }
+        .footer {
+            background-color: #f1f1f1; 
+            color: #666666; 
+            text-align: center; 
+            padding: 10px 20px; 
+            border-top: 1px solid #dddddd;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            Hello,
+        </div>
+        <div class="content">
+            The new campaign {{ campaign_name }} starts now. Please review the changes and check your dashboard for more details.
+        </div>
+        <div class="footer">
+            Best regards,<br>
+            {{ site_name }}
+        </div>
+    </div>
+</body>
+</html>
