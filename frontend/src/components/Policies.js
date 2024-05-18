@@ -77,19 +77,33 @@ const Policies = () => {
                 <div className='policies-list'>
                     <div className="policies-header">
                         <h2>Policies</h2>
-                        { isAdmin && (
-                        <button onClick={handleCreatePolicy} className='create-policy-button'>
-                            Create Policy
-                        </button>
-                    ) }
+                        {isAdmin && (
+                            <button onClick={handleCreatePolicy} className='create-policy-button'>
+                                Create Policy
+                            </button>
+                        )}
                     </div>
                     {policies.length > 0 ? (
-                        policies.map((policy, index) => (
-                            <div key={index} onClick={() => navigate(`/policies/${policy.id}`)} className='policy-item'>
-                                <h3>{policy.base_title}</h3>
-                                <p>{policy.description}</p>
-                            </div>
-                        ))
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Status</th>
+                                    <th>Number of Languages</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {policies.map((policy, index) => (
+                                    <tr key={index} onClick={() => navigate(`/policies/${policy.id}`)}>
+                                        <td>{policy.base_title}</td>
+                                        <td>{policy.description}</td>
+                                        <td>{policy.status}</td>
+                                        <td>{policy.languages.length}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     ) : (
                         <div className="no-policies-message">
                             <h3>There are no policies now, enjoy the silence.</h3>
