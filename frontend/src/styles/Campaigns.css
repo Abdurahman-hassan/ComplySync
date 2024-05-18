@@ -167,3 +167,7 @@
 .campaign-details .policies p, .groups p {
     margin: 5px auto;
 }
+
+.campaign-details .policies p:hover {
+    color: var(--main-blue);
+}

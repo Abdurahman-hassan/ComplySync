@@ -180,12 +180,25 @@ body {
   display: flex;
 }
 
-.update-and-delete .update-btn, .update-and-delete .delete-btn {
+.update-and-delete .update-btn,
+.update-and-delete .delete-btn,
+.update-and-delete .complete-btn {
   padding: 10px 10px;
   margin: 0px 0px 0px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.update-and-delete .complete-btn {
+  background-color: #00b34e;
+  color: #fff;
+}
+
+.update-and-delete .complete-btn:disabled,
+.update-and-delete .complete-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .update-and-delete .update-btn {
