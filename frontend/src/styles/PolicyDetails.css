@@ -1,3 +1,8 @@
+:root {
+    --main-blue: #007bff;
+    --main-dark-blue: #0056b3;
+}
+
 .policy-details-container {
     margin: 20px;
     padding: 20px;
@@ -19,6 +24,72 @@
     padding: 5px 0;
 }
 
-.documents > h2 {
+.documents>h2 {
     margin: 30px 20px;
+}
+
+.documents .tabs {
+    display: flex;
+    margin: auto 20px;
+}
+
+.documents .tabs .tab {
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid #717171;
+    color: #717171;
+}
+
+.documents .tabs .tab:hover {
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.documents .tabs .tab.active {
+    background-color: var(--main-blue);
+    color: #fff;
+    border: 2px solid var(--main-dark-blue);
+}
+
+.documents select {
+    /* appearance:none; */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    margin-left: 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.documents select option {
+    padding: 5px 10px;
+}
+
+.documents .document-content.hidden {
+    display: none;
+}
+
+.documents .document-content {
+    margin: 35px 20px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.documents .document-content h2 {
+    color: #333333;
+    font-size: 24px;
+    margin: auto auto 15px;
+}
+
+.documents .document-content iframe {
+    width: 100%;
+    height: 100vh;
+    border: 1px solid #ccc;
 }

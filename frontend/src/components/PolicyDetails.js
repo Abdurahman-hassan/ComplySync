@@ -17,6 +17,10 @@ const PolicyDetails = () => {
     const [isLoading, setIsLoading] = useState(false);
     const minimumLoadingTime = 400;
 
+    // State for handling document selection (dropdown for regular users)
+    const [selectedDocumentId, setSelectedDocumentId] = useState(undefined);
+
+    const [activeTabIndex, setActiveTabIndex] = useState(0); // Track the active tab index
     const [pdfUrls, setPdfUrls] = useState([]);
 
     const fetchpdfFile = useCallback(async (documentId) => {
@@ -57,6 +61,46 @@ const PolicyDetails = () => {
         }
     }, [policy, fetchpdfFile]);
 
+    // Function to handle tab click
+    const handleTabClick = (index) => {
+        setActiveTabIndex(index);
+    };
+
+    const handleDocumentChange = (event) => {
+        const value = event.target.value;
+        if (value !== "") {
+            setSelectedDocumentId(parseInt(value));
+        } else {
+            setSelectedDocumentId(undefined);
+        }
+    };
+
+    const handleMarkComplete = async () => {
+        setIsLoading(true);
+        try {
+            const response = await axios.patch(`http://127.0.0.1:8000/api/policies/${id}/`, {
+                status: "published"
+            }, {
+                headers: { Authorization: `Token ${authToken}` }
+            });
+            console.log("Policy marked complete:", response.data);
+            // Refresh the page after successful update
+            window.location.reload();
+        } catch (error) {
+            console.error("Error marking policy complete:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const extractFileName = (url) => {
+        if (!url) return "";
+        const parts = url.split("/");
+        const filenameWithParams = parts[parts.length - 1];
+        const filename = filenameWithParams.split("?")[0]; // Remove any query parameters
+        return filename;
+    };
+
     if (deleteResponse) {
         console.log(deleteResponse);
     }
@@ -78,6 +122,9 @@ const PolicyDetails = () => {
                         <div className="head">
                             <h2>{policy.base_title}</h2>
                             <div className="update-and-delete">
+                                <button className="complete-btn" disabled={!policy || policy.status === "published"} onClick={handleMarkComplete}>
+                                    Complete Reading
+                                </button>
                                 {isAdmin && <button className='update-btn' onClick={() => navigate(`/policies/${id}/update`)} >Update</button>}
                                 {isAdmin && <button className='delete-btn' onClick={deleteChild}>Delete</button>}
                             </div>
@@ -89,19 +136,47 @@ const PolicyDetails = () => {
                     </div>
                     <div className="documents">
                         <h2>Documents</h2>
-                        <div className="document-list">
-                            {policy.languages.map((language, index) => (
-                                <div key={language.id} className='document-details'>
-                                    <div className="head">
-                                        <h2>{language.localized_title}</h2>
-                                        <p>{language.language}</p>
-                                    </div>
-                                    {pdfUrls.length > index && pdfUrls[index] && (
-                                        <iframe src={pdfUrls[index]} title="Document"></iframe>
-                                    )}
-                                </div>
-                            ))}
+                        {isAdmin ? ( // Display tabs for admins
+                            <div className="tabs">
+                                {policy.languages.map((language, index) => (
+                                    <button key={language.id} className={`tab ${activeTabIndex === index ? 'active' : ''}`} onClick={() => handleTabClick(index)}>{language.language}</button>
+                                ))}
+                            </div>
+                        ) : ( // Display dropdown for regular users
+                            <select value={selectedDocumentId} onChange={handleDocumentChange}>
+                                <option value="">Select Language</option>
+                                {policy.languages.map((language) => (
+                                    <option key={language.id} value={language.id}>{language.language}</option>
+                                ))}
+                            </select>
+                        )}
+                        <div className={`document-content ${selectedDocumentId || isAdmin ? '' : 'hidden'}`}>
+                            <>
+                                {isAdmin ? (
+                                    activeTabIndex !== undefined && pdfUrls.length > activeTabIndex && pdfUrls[activeTabIndex] && (
+                                        <>
+                                            <h2>{policy.languages[activeTabIndex].localized_title}</h2>
+                                            <iframe src={pdfUrls[activeTabIndex]} title="Document"></iframe>
+                                        </>
+                                    )
+                                ) : (
+                                    selectedDocumentId && pdfUrls.length > 0 && (
+                                        <>
+                                            <h2>{policy.languages.find(lang => lang.id === selectedDocumentId)?.localized_title}</h2>
+                                            <iframe src={(() => {
+                                                const selectedLanguage = policy.languages.find(lang => lang.id === selectedDocumentId);
+                                                if (!selectedLanguage) return '';
+                                                const selectedDocumentFile = selectedLanguage.document_file;
+                                                const matchingUrl = pdfUrls.find(url => extractFileName(url) === extractFileName(selectedDocumentFile));
+                                                console.log(matchingUrl);
+                                                return matchingUrl || '';
+                                            })()} title="Document"></iframe>
+                                        </>
+                                    )
+                                )}
+                            </>
                         </div>
+
                     </div>
                 </>
             )}
