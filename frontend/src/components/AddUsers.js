@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../styles/EmailUploader.css';
+import '../styles/AddUsers.css';
 
-function EmailUploader() {
+function AddUsers() {
     const [file, setFile] = useState(null);
     const [manualEmails, setManualEmails] = useState('');
     const [error, setError] = useState('');
@@ -107,4 +107,4 @@ function EmailUploader() {
     );
 }
 
-export default EmailUploader;
+export default AddUsers;

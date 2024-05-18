@@ -4,7 +4,6 @@ import Layout from './components/Layout';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import ActivationPage from './components/ActivationPage';
-import EmailUploader from './components/EmailUploader';
 import Policies from './components/Policies';
 import Campaigns from './components/Campaigns';
 import CampaignDetails from './components/CampaignDetails';
@@ -22,6 +21,8 @@ import NotFound from './components/NotFound';
 import UpdateCampaign from './components/UpdateCampaign';
 import UpdatePolicy from './components/UpdatePolicy';
 import UpdateGroup from './components/UpdateGroup';
+import Users from './components/Users';
+import AddUsers from './components/AddUsers';
 
 const AppRoutes = ({ username, handleLogout }) => (
     <Routes>
@@ -29,7 +30,8 @@ const AppRoutes = ({ username, handleLogout }) => (
         <Route path="/auth/activate" element={<ActivationPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/emailuploader" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><EmailUploader /></Layout></ProtectedRoute>} />
+        <Route path="/users/add" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><AddUsers /></Layout></ProtectedRoute>} />
+        <Route path="/users" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Users /></Layout></ProtectedRoute>} />
         <Route path="/policies" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Policies /></Layout></ProtectedRoute>} />
         <Route path="/campaigns" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Campaigns /></Layout></ProtectedRoute>} />
         <Route path="/campaigns/create" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreateCampaign /></Layout></ProtectedRoute>} />

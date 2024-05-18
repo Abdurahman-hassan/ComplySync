@@ -38,7 +38,11 @@ function App() {
 
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/auth/users/me/', { headers });
-        setUsername(response.data.email);
+        if (response.data.name) {
+          setUsername(response.data.name);
+        } else {
+          setUsername(response.data.email);
+        }
         if (response.data.is_superuser === true) {
           setIsAdmin(true);
         } else {

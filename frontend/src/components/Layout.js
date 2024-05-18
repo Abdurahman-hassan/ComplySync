@@ -39,7 +39,7 @@ const Layout = ({ children, username, handleLogout }) => {
                 <NavLink to="/groups" className={getActiveLinkClass}><button>Groups</button></NavLink>
                 <NavLink to="/campaigns" className={getActiveLinkClass}><button>Campaigns</button></NavLink>
                 {isAdmin && (
-                    <NavLink to="/emailuploader" className={getActiveLinkClass}><button>Email Uploader</button></NavLink>
+                    <NavLink to="/users" className={getActiveLinkClass}><button>Users</button></NavLink>
                 )}
                 <button onClick={logout}>Logout</button>
             </div>
@@ -48,7 +48,7 @@ const Layout = ({ children, username, handleLogout }) => {
                     {showBackButton && (
                         <button className="back-btn" onClick={() => navigate(-1)}><i className="fa-solid fa-arrow-left-long"></i></button>
                     )}
-                    <span>Welcome, {username}</span>
+                    <span><i className="fa-solid fa-user" ></i> {username}</span>
                 </div>
                 {children}
             </div>
