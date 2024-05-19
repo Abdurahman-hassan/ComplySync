@@ -26,8 +26,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 CORS_ALLOWED_ORIGINS = [
     'http://api.greencoder.tech',
     'https://api.greencoder.tech',
-    'http://complysync.greencoder.tech:3000'
-    'https://complysync.greencoder.tech',
     'https://www.greencoder.tech',
     'https://greencoder.tech',
 ]
@@ -37,8 +35,6 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = [
     'http://api.greencoder.tech',
     'https://api.greencoder.tech',
-    'http://complysync.greencoder.tech:3000'
-    'https://complysync.greencoder.tech',
     'https://www.greencoder.tech',
     'https://greencoder.tech'
 ]
