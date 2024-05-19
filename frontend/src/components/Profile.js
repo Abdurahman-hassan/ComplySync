@@ -3,13 +3,15 @@ import axios from 'axios';
 import { useAuth } from '../App';
 import '../styles/Profile.css';
 import LoadingSpinner from './LoadingSpinner';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const [user, setUser] = useState(null);
-    const { authToken } = useAuth();
+    const { isAdmin, authToken } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const navigate = useNavigate();
     const minimumLoadingTime = 400;
 
     useEffect(() => {
@@ -40,6 +42,11 @@ const Profile = () => {
     const handleResetPassword = async () => {
         if (!user?.email) {
             console.error('User email not available');
+            return;
+        }
+
+        if (isAdmin) {
+            navigate('/profile/reset-password');
             return;
         }
 

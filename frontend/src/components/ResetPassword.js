@@ -37,7 +37,8 @@ const ResetPassword = () => {
                 );
                 if (response.status === 200) {
                     setSuccess('Password updated successfully!');
-                    navigate('/login');
+                    // Display success message for 3 seconds before navigating
+                    setTimeout(() => navigate('/login'), 3000);
                 } else {
                     setError('Failed to reset password.');
                 }

@@ -25,6 +25,7 @@ import Users from './components/Users';
 import AddUsers from './components/AddUsers';
 import Profile from './components/Profile';
 import ResetPassword from './components/ResetPassword';
+import ResetAdminPassword from './components/ResetAdminPassword';
 
 const AppRoutes = ({ username, handleLogout }) => (
     <Routes>
@@ -33,6 +34,7 @@ const AppRoutes = ({ username, handleLogout }) => (
         <Route path="/auth/reset-password/" element={<ResetPassword />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<LandingPage />} />
+        <Route path="/profile/reset-password" element={<ProtectedRoute><ResetAdminPassword /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Profile /></Layout></ProtectedRoute>} />
         <Route path="/users/add" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><AddUsers /></Layout></ProtectedRoute>} />
         <Route path="/users" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Users /></Layout></ProtectedRoute>} />
