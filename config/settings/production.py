@@ -101,3 +101,22 @@ sentry_sdk.init(
     environment="production",
     traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
 )
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://api.greencoder.tech',
+    'https://api.greencoder.tech',
+    'https://www.greencoder.tech',
+    'https://greencoder.tech',
+]
+
+CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS  # Ensure consistency
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://api.greencoder.tech',
+    'https://api.greencoder.tech',
+    'https://www.greencoder.tech',
+    'https://greencoder.tech',
+]
