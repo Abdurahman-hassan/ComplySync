@@ -16,7 +16,7 @@ function ActivationPage() {
 
     useEffect(() => {
         if (uid && token) {
-            axios.post('http://localhost:8000/api/auth/users/activation/', { uid, token })
+            axios.post('https://api.greencoder.tech/api/auth/users/activation/', { uid, token })
                 .then(response => {
                     alert('Account activated successfully!');
                     navigate('/login');
