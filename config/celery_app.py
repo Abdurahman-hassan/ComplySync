@@ -4,7 +4,11 @@ from celery import Celery
 from django.conf import settings
 import os
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
+env = os.getenv('DJANGO_ENV', 'development')  # Default to 'development' if not set
+if env == 'production':
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
+else:
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
 
 app = Celery("app_config")
 app.conf.update(**settings.CELERY_CONFIG)
