@@ -48,7 +48,7 @@ const Layout = ({ children, username, handleLogout }) => {
                     {showBackButton && (
                         <button className="back-btn" onClick={() => navigate(-1)}><i className="fa-solid fa-arrow-left-long"></i></button>
                     )}
-                    <span><i className="fa-solid fa-user" ></i> {username}</span>
+                    <span onClick={() => navigate('/profile')}><i className="fa-solid fa-user" ></i> {username}</span>
                 </div>
                 {children}
             </div>
