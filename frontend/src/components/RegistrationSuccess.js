@@ -5,7 +5,7 @@ function RegistrationSuccess({ userEmail }) {
     const [message, setMessage] = useState('');
 
     const resendActivationEmail = () => {
-        axios.post('http://127.0.0.1:8000/api/auth/users/resend_activation/', { email: userEmail })
+        axios.post('https://api.greencoder.tech/api/auth/users/resend_activation/', { email: userEmail })
             .then(response => {
                 if (response.status === 200) {
                     setMessage('Activation email has been resent. Please check your inbox.');

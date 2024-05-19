@@ -27,7 +27,7 @@ const Login = () => {
                 password: e.target.password.value, // Assuming password input has a name="password"
             };
 
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/token/login/', formData, {
+            const response = await axios.post('https://api.greencoder.tech/api/auth/token/login/', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

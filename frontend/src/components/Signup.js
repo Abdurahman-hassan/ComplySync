@@ -34,7 +34,7 @@ const Signup = () => {
         setError(null); // Clear any previous error
 
         try {
-            await axios.post('http://127.0.0.1:8000/api/auth/users/', formData, {
+            await axios.post('https://api.greencoder.tech/api/auth/users/', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

@@ -47,7 +47,7 @@ const Groups = () => {
     }, [authToken]);
 
     useEffect(() => {
-        fetchGroups('http://127.0.0.1:8000/api/groups/');
+        fetchGroups('https://api.greencoder.tech/api/groups/');
     }, [fetchGroups]);
 
     const handleGroupClick = (groupId) => {

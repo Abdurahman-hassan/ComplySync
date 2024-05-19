@@ -37,7 +37,7 @@ function App() {
       if (!authToken) return; // Exit early if there is no auth token
 
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/users/me/', { headers });
+        const response = await axios.get('https://api.greencoder.tech/api/auth/users/me/', { headers });
         if (response.data.name) {
           setUsername(response.data.name);
         } else {

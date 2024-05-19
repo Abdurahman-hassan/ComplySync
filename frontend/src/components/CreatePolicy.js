@@ -33,7 +33,7 @@ const CreatePolicy = () => {
         event.preventDefault();
         try {
             console.log('formData:', formData);
-            const response = await axios.post('http://127.0.0.1:8000/api/policies/', formData, { headers });
+            const response = await axios.post('https://api.greencoder.tech/api/policies/', formData, { headers });
             console.log('response:', response);
             if (setNewPolicyCreated) {
                 setNewPolicyCreated(true);

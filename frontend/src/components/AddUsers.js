@@ -82,7 +82,7 @@ function AddUsers() {
         };
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/bulk-create/', { emails }, { headers });
+            const response = await axios.post('https://api.greencoder.tech/api/bulk-create/', { emails }, { headers });
             console.log('Server Response:', response.data);
         } catch (error) {
             console.error('Error uploading emails:', error.response ? error.response.data : error);

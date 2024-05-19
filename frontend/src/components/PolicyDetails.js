@@ -12,8 +12,8 @@ const PolicyDetails = () => {
     const navigate = useNavigate();
     const { isAdmin, authToken } = useAuth();
     const { id } = useParams();
-    const { data: policy, error } = useFetch("http://127.0.0.1:8000/api/policies/", id);
-    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("http://127.0.0.1:8000/api/policies/", id);
+    const { data: policy, error } = useFetch("https://api.greencoder.tech/api/policies/", id);
+    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("https://api.greencoder.tech/api/policies/", id);
     const [isLoading, setIsLoading] = useState(false);
     const minimumLoadingTime = 400;
 
@@ -27,7 +27,7 @@ const PolicyDetails = () => {
         const startTime = performance.now();
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://127.0.0.1:8000/api/languages/${documentId}/view-pdf/`, {
+            const response = await axios.get(`https://api.greencoder.tech/api/languages/${documentId}/view-pdf/`, {
                 headers: { Authorization: `Token ${authToken}` }
             });
 
@@ -78,7 +78,7 @@ const PolicyDetails = () => {
     const handleMarkComplete = async () => {
         setIsLoading(true);
         try {
-            const response = await axios.patch(`http://127.0.0.1:8000/api/policies/${id}/`, {
+            const response = await axios.patch(`https://api.greencoder.tech/api/policies/${id}/`, {
                 status: "published"
             }, {
                 headers: { Authorization: `Token ${authToken}` }

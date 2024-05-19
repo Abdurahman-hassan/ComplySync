@@ -13,7 +13,7 @@ const UpdateCampaign = () => {
     const [campaignName, setCampaignName] = useState('');
     const [startDateTime, setStartDateTime] = useState('');
     const [endDateTime, setEndDateTime] = useState('');
-    const { data: campaignDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/campaigns/", campaignId);
+    const { data: campaignDetails, error } = useFetchDetails("https://api.greencoder.tech/api/campaigns/", campaignId);
 
     const formatDateTime = (dateTimeString) => {
         const date = new Date(dateTimeString);
@@ -53,7 +53,7 @@ const UpdateCampaign = () => {
 
             // Send the PATCH request only if there are updated fields
             if (Object.keys(updatedFields).length > 0) {
-                await axios.patch(`http://127.0.0.1:8000/api/campaigns/${campaignId}/`, updatedFields, {
+                await axios.patch(`https://api.greencoder.tech/api/campaigns/${campaignId}/`, updatedFields, {
                     headers: { 'Authorization': `Token ${authToken}` }
                 });
             }
