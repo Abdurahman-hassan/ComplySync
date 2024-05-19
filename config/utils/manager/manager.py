@@ -69,9 +69,12 @@ class Manager:
     def setup(self) -> None:
         self.validate()
         if "--no-django" not in self._args:
-            os.environ.setdefault(
-                "DJANGO_SETTINGS_MODULE", "config.settings.development"
-            )
+
+            env = os.getenv('DJANGO_ENV', 'development')  # Default to 'development' if not set
+            if env == 'production':
+                os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
+            else:
+                os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
             django.setup()
         self.run()
 
