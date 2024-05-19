@@ -23,19 +23,3 @@ MIDDLEWARE += [
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-CORS_ALLOWED_ORIGINS = [
-    'https://api.greencoder.tech',
-    'https://www.greencoder.tech',
-    'https://greencoder.tech',
-]
-
-CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS  # Ensure consistency
-
-CORS_ORIGIN_ALLOW_ALL = False
-
-CSRF_TRUSTED_ORIGINS = [
-    'https://api.greencoder.tech',
-    'https://www.greencoder.tech',
-    'https://greencoder.tech',
-]
