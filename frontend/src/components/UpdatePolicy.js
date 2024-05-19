@@ -15,7 +15,7 @@ const UpdatePolicy = () => {
     const [status, setStatus] = useState('');
     const [allow_download, setAllowDownload] = useState(false);
     const [description, setDescription] = useState('');
-    const { data: policyDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/policies/", id);
+    const { data: policyDetails, error } = useFetchDetails("https://api.greencoder.tech/api/policies/", id);
     const headers = {
         Authorization: `Token ${authToken}`,
     };
@@ -52,7 +52,7 @@ const UpdatePolicy = () => {
 
         if (Object.keys(updatedData).length > 0) {
             try {
-                const response = await axios.patch(`http://127.0.0.1:8000/api/policies/${id}/`, updatedData, { headers });
+                const response = await axios.patch(`https://api.greencoder.tech/api/policies/${id}/`, updatedData, { headers });
                 console.log('response:', response);
                 navigate('/policies');
             } catch (error) {

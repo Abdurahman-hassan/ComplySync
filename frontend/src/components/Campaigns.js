@@ -42,7 +42,7 @@ const Campaigns = () => {
     }, [authToken]);
 
     useEffect(() => {
-        fetchCampaigns('http://127.0.0.1:8000/api/campaigns/');
+        fetchCampaigns('https://api.greencoder.tech/api/campaigns/');
     }, [fetchCampaigns]);
 
     const handleCampaignClick = (campaignId) => {

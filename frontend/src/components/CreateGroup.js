@@ -16,7 +16,7 @@ const CreateGroup = () => {
         // Fetch the list of users when the component mounts
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/auth/users/', {
+                const response = await axios.get('https://api.greencoder.tech/api/auth/users/', {
                     headers: { 'Authorization': `Token ${authToken}` }
                 });
                 console.log(response.data.results);
@@ -32,7 +32,7 @@ const CreateGroup = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const groupResponse = await axios.post('http://127.0.0.1:8000/api/groups/', {
+            const groupResponse = await axios.post('https://api.greencoder.tech/api/groups/', {
                 group_name: groupName
             }, {
                 headers: { 'Authorization': `Token ${authToken}` }
@@ -41,7 +41,7 @@ const CreateGroup = () => {
             // Assign users to the group using the new group ID
             if (groupResponse.data && groupResponse.data.id) {
                 const groupId = groupResponse.data.id;
-                await axios.post(`http://127.0.0.1:8000/api/groups/${groupId}/assign_users_to_group/`, {
+                await axios.post(`https://api.greencoder.tech/api/groups/${groupId}/assign_users_to_group/`, {
                     user_ids: selectedUsers // An array of user IDs to be added to the group
                 }, {
                     headers: { 'Authorization': `Token ${authToken}` }

@@ -11,8 +11,8 @@ const GroupDetails = () => {
     const { groupId } = useParams();
     const { isAdmin } = useAuth();
     const navigate = useNavigate();
-    const { data: groupDetails, error } = useFetch(`http://127.0.0.1:8000/api/groups/`, groupId);
-    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("http://127.0.0.1:8000/api/groups/", groupId);
+    const { data: groupDetails, error } = useFetch(`https://api.greencoder.tech/api/groups/`, groupId);
+    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("https://api.greencoder.tech/api/groups/", groupId);
 
     if (deleteResponse) {
         console.log(deleteResponse);

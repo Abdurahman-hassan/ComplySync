@@ -34,7 +34,7 @@ const CreateCampaign = () => {
                 console.error('Error fetching policies:', error);
             }
         };
-        fetchPolicies('http://127.0.0.1:8000/api/policies/');
+        fetchPolicies('https://api.greencoder.tech/api/policies/');
     }, [authToken]);
 
     useEffect(() => {
@@ -55,14 +55,14 @@ const CreateCampaign = () => {
                 console.error('Error fetching groups:', error);
             }
         };
-        fetchGroups('http://127.0.0.1:8000/api/groups/');
+        fetchGroups('https://api.greencoder.tech/api/groups/');
     }, [authToken]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             console.log(`campaign_name: ${campaignName}\nstart_date: ${startDateTime}\nend_date: ${endDateTime}`);
-            const campaignResponse = await axios.post('http://127.0.0.1:8000/api/campaigns/', {
+            const campaignResponse = await axios.post('https://api.greencoder.tech/api/campaigns/', {
                 name: campaignName,
                 start_date: startDateTime,
                 end_date: endDateTime,
@@ -76,7 +76,7 @@ const CreateCampaign = () => {
                 console.log(`policies_ids: ${selectedPolicies}`);
                 console.log(`target_groups_ids: ${selectedGroups}`);
                 console.log(`completed_users_groups_ids: ${selectedGroups}`);
-                await axios.post(`http://127.0.0.1:8000/api/campaigns/${campaignId}/assign-resources/`, {
+                await axios.post(`https://api.greencoder.tech/api/campaigns/${campaignId}/assign-resources/`, {
                     policies_ids: selectedPolicies, // An array of policies IDs to be added to the campaign
                     target_groups_ids: selectedGroups,
                     completed_users_groups_ids: selectedGroups

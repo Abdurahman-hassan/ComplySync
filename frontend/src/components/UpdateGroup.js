@@ -9,7 +9,7 @@ const UpdateGroup = () => {
     const navigate = useNavigate();
     const { authToken } = useAuth();
     const { groupId } = useParams();
-    const { data: GroupDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/groups/", groupId);
+    const { data: GroupDetails, error } = useFetchDetails("https://api.greencoder.tech/api/groups/", groupId);
     const [groupName, setGroupName] = useState('');
     // const [users, setUsers] = useState([]);
     // const [selectedUsers, setSelectedUsers] = useState([]);
@@ -25,7 +25,7 @@ const UpdateGroup = () => {
     //     // Fetch the list of users when the component mounts
     //     const fetchUsers = async () => {
     //         try {
-    //             const response = await axios.get('http://127.0.0.1:8000/api/auth/users/', { headers: { Authorization: `Token ${authToken}` } });
+    //             const response = await axios.get('https://api.greencoder.tech/api/auth/users/', { headers: { Authorization: `Token ${authToken}` } });
     //             console.log(response.data.results);
     //             setUsers(response.data.results);
     //         } catch (error) {
@@ -60,12 +60,12 @@ const UpdateGroup = () => {
         try {
 
             if (groupName !== GroupDetails.group_name) {
-                await axios.put(`http://127.0.0.1:8000/api/groups/${groupId}/`, { group_name: groupName }, { headers });
+                await axios.put(`https://api.greencoder.tech/api/groups/${groupId}/`, { group_name: groupName }, { headers });
             }
 
             // Assign users to the group using the new group ID
             // if (selectedUsers !== GroupDetails.user_ids) {
-            //     await axios.put(`http://127.0.0.1:8000/api/groups/${groupId}/assign_users_to_group/`, { user_ids: selectedUsers }, { headers });
+            //     await axios.put(`https://api.greencoder.tech/api/groups/${groupId}/assign_users_to_group/`, { user_ids: selectedUsers }, { headers });
             // }
 
             navigate(-1);

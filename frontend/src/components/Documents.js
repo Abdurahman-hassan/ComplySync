@@ -44,7 +44,7 @@ const Documents = () => {
 
 
     useEffect(() => {
-        fetchDocuments('http://127.0.0.1:8000/api/languages/');
+        fetchDocuments('https://api.greencoder.tech/api/languages/');
     }, [fetchDocuments]);
 
     const handleNextPage = () => {
@@ -60,7 +60,7 @@ const Documents = () => {
     };
 
     const handleUploadDocument = async () => {
-        const url = 'http://127.0.0.1:8000/api/upload-pdf/';
+        const url = 'https://api.greencoder.tech/api/upload-pdf/';
         window.open(url, '_blank');
     };
 

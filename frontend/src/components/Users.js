@@ -41,7 +41,7 @@ const Users = () => {
     }, [authToken]);
 
     useEffect(() => {
-        fetchUsers('http://127.0.0.1:8000/api/auth/users/');
+        fetchUsers('https://api.greencoder.tech/api/auth/users/');
     }, [fetchUsers]);
 
     const handleAddUser = () => {

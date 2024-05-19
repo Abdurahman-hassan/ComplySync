@@ -80,7 +80,7 @@
 
 //     useEffect(() => {
 //         // Fetch policies
-//         axios.get('http://127.0.0.1:8000/api/policies/')
+//         axios.get('https://api.greencoder.tech/api/policies/')
 //             .then(response => {
 //                 console.log(response.data.results);
 //                 setPolicies(response.data.results);
@@ -99,7 +99,7 @@
     
 //         try {
 //             console.log(formData);
-//             const response = await axios.post('http://127.0.0.1:8000/api/upload-pdf/', formData, {
+//             const response = await axios.post('https://api.greencoder.tech/api/upload-pdf/', formData, {
 //                 headers: {
 //                     'Authorization': `Token ${authToken}`,
 //                     'Content-Type': 'multipart/form-data',
@@ -166,7 +166,7 @@ const UploadDocument = () => {
     const [uploadFilePage, setUploadFilePage] = useState('');
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/upload-pdf/')
+        axios.get('https://api.greencoder.tech/api/upload-pdf/')
             .then(response => {
                 console.log(response);
                 setUploadFilePage(response.data);

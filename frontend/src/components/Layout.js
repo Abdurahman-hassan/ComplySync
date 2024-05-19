@@ -25,7 +25,7 @@ const Layout = ({ children, username, handleLogout }) => {
     const getActiveLinkClass = ({ isActive }) => isActive ? 'active' : '';
 
     const logout = async () => {
-        await axios.post('http://127.0.0.1:8000/api/auth/token/logout/', null, { headers });
+        await axios.post('https://api.greencoder.tech/api/auth/token/logout/', null, { headers });
         handleLogout();
         navigate('/login');
     };

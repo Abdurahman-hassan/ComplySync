@@ -49,7 +49,7 @@ const Policies = () => {
 
 
     useEffect(() => {
-        fetchPolicies('http://127.0.0.1:8000/api/policies/');
+        fetchPolicies('https://api.greencoder.tech/api/policies/');
     }, [fetchPolicies]);
 
     const handleCreatePolicy = () => {

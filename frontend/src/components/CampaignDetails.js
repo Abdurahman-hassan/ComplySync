@@ -11,8 +11,8 @@ const CampaignDetails = () => {
     const navigate = useNavigate();
     const { isAdmin } = useAuth();
     const { campaignId } = useParams();
-    const { data: campaignDetails, error } = useFetch("http://127.0.0.1:8000/api/campaigns/", campaignId);
-    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("http://127.0.0.1:8000/api/campaigns/", campaignId);
+    const { data: campaignDetails, error } = useFetch("https://api.greencoder.tech/api/campaigns/", campaignId);
+    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("https://api.greencoder.tech/api/campaigns/", campaignId);
 
     if (deleteResponse) {
         console.log(deleteResponse);
