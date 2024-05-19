@@ -30,11 +30,13 @@ CORS_ALLOWED_ORIGINS = [
     'https://greencoder.tech',
 ]
 
-CORS_ORIGIN_WHITELIST = [
+CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS  # Ensure consistency
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CSRF_TRUSTED_ORIGINS = [
     'http://api.greencoder.tech',
     'https://api.greencoder.tech',
     'https://www.greencoder.tech',
-    'https://greencoder.tech'
+    'https://greencoder.tech',
 ]
-
-CORS_ORIGIN_ALLOW_ALL = False
