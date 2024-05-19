@@ -9,11 +9,7 @@ from config.utils.manager.decorator import manager
 @manager
 def main():
     """Run administrative tasks."""
-    env = os.getenv('DJANGO_ENV', 'development')  # Default to 'development' if not set
-    if env == 'production':
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
-    else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
