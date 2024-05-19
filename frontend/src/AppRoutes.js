@@ -23,13 +23,17 @@ import UpdatePolicy from './components/UpdatePolicy';
 import UpdateGroup from './components/UpdateGroup';
 import Users from './components/Users';
 import AddUsers from './components/AddUsers';
+import Profile from './components/Profile';
+import ResetPassword from './components/ResetPassword';
 
 const AppRoutes = ({ username, handleLogout }) => (
     <Routes>
         <Route path="/signup" element={<Signup />} />
         <Route path="/auth/activate" element={<ActivationPage />} />
+        <Route path="/auth/reset-password/" element={<ResetPassword />} />
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<LandingPage />} />
+        <Route path="/profile" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Profile /></Layout></ProtectedRoute>} />
         <Route path="/users/add" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><AddUsers /></Layout></ProtectedRoute>} />
         <Route path="/users" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Users /></Layout></ProtectedRoute>} />
         <Route path="/policies" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Policies /></Layout></ProtectedRoute>} />

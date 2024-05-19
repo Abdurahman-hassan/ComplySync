@@ -72,11 +72,23 @@ body {
 }
 
 /* Styles for error messages */
-.signup-form .error-message {
-  color: #d9534f;
+
+.error-message, .success-message {
+  padding: 10px;
+  border-radius: 4px;
   font-size: 14px;
+  margin-top: 10px;
 }
 
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.success-message {
+  background-color: #dff0d8;
+  color: #388e3c;
+}
 
 /* App.css */
 .app {
@@ -154,6 +166,15 @@ body {
 
 .navbar .back-btn:hover {
   background-color: var(--main-dark-blue);
+}
+
+.navbar span {
+  transition: all 0.3s ease;
+}
+
+.navbar span:hover {
+  cursor: pointer;
+  color: var(--main-blue);
 }
 
 .home {
