@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../App';
 import axios from 'axios';
 import '../styles/AddUsers.css';
+import { ThreeDots } from "react-loader-spinner";
 
 function AddUsers() {
+    const { authToken } = useAuth();
     const [file, setFile] = useState(null);
     const [manualEmails, setManualEmails] = useState('');
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+    const minimumLoadingTime = 500;
 
     const handleFileChange = (event) => {
         setFile(event.target.files[0]);
@@ -28,7 +37,7 @@ function AddUsers() {
         const header = allLines[0].trim();
 
         if (header.toLowerCase() !== 'emails') {
-            alert('CSV file must have a header named "Emails"');
+            setErrorMessage('Invalid CSV file, CSV file must have a header named "Emails"');
             return null;
         }
 
@@ -75,17 +84,34 @@ function AddUsers() {
     };
 
     const uploadEmails = async (emails) => {
-        const token = localStorage.getItem('authToken');  // Replace with actual token or use environment variables
         const headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Token ${token}`
+            'Authorization': `Token ${authToken}`
         };
 
+        const startTime = performance.now();
+        setIsLoading(true);
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/bulk-create/', { emails }, { headers });
-            console.log('Server Response:', response.data);
+            console.log("emails", emails);
+            const response = await axios.post('http://127.0.0.1:8000/api/bulk-create/', { emails: emails }, { headers });
+            console.log('Server Response:', response);
+            if (response.status === 201) {
+                setSuccessMessage(`Successfully uploaded ${emails.length} emails!`);
+                setTimeout(() => navigate(`/users`), 3000);
+            } else {
+                setError(response.data.detail);
+            }
         } catch (error) {
             console.error('Error uploading emails:', error.response ? error.response.data : error);
+            setErrorMessage(error.response? error.response.data.detail : error);
+        } finally {
+            const elapsedTime = performance.now() - startTime;
+            if (elapsedTime < minimumLoadingTime) {
+                const remainingTime = minimumLoadingTime - elapsedTime;
+                setTimeout(() => setIsLoading(false), remainingTime);
+            } else {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -101,8 +127,10 @@ function AddUsers() {
                 ></textarea>
             </div>
             {error && <div className="error-message">{error}</div>}
-            <button onClick={handleUpload}>Upload and Send Emails</button>
+            <button onClick={handleUpload} disabled={isLoading}>{isLoading ? <ThreeDots visible={true} height="50" width="50" color="#fff" radius="9" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="" /> : 'Add users and send emails'}</button>
             <p>Please use a CSV file with a header "Emails" or manually enter the emails in the textarea.</p>
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+            {successMessage && <div className="success-message">{successMessage}</div>}
         </div>
     );
 }

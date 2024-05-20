@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
@@ -33,7 +33,7 @@ const ResetPassword = () => {
             try {
                 const response = await axios.post(
                     'http://localhost:8000/api/auth/users/reset_password_confirm/',
-                    { uid, token, new_password: newPassword, re_new_password: confirmPassword }
+                    { uid: uid, token: token, new_password: newPassword, re_new_password: confirmPassword }
                 );
                 if (response.status === 200) {
                     setSuccess('Password updated successfully!');
@@ -68,6 +68,7 @@ const ResetPassword = () => {
                 <label htmlFor="confirmPassword">Confirm Password</label>
                 <input type="password" id="confirmPassword" placeholder="Confirm new password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 <button type="submit" onClick={resetPassword} disabled={isLoading}>{isLoading ? <ThreeDots visible={true} height="50" width="50" color="#fff" radius="9" ariaLabel="three-dots-loading" wrapperStyle={{}} wrapperClass="" /> : 'Reset Password'}</button>
+                <Link to="/login">Already have an account with password? Login</Link>
                 {error && <div className="error-message">{error}</div>}
                 {success && <div className="success-message">{success}</div>}
             </div>

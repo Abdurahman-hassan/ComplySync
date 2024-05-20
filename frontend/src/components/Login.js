@@ -41,7 +41,11 @@ const Login = () => {
             navigate('/policies');
         } catch (error) {
             console.error(error.message);
-            setError(error.message);
+            if (error.response.data.non_field_errors === 'Unable to log in with provided credentials.') {
+                setError('Invalid credentials');
+            } else {
+                setError(error.response.data.non_field_errors);
+            }
         } finally {
             const elapsedTime = performance.now() - startTime;
             if (elapsedTime < minimumLoadingTime) {
