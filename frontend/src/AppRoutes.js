@@ -26,6 +26,8 @@ import AddUsers from './components/AddUsers';
 import Profile from './components/Profile';
 import ResetPassword from './components/ResetPassword';
 import ResetAdminPassword from './components/ResetAdminPassword';
+import UpdateGroupUsers from './components/UpdateGroupUsers';
+import DeleteGroupUsers from './components/DeleteGroupUsers';
 
 const AppRoutes = ({ username, handleLogout }) => (
     <Routes>
@@ -50,6 +52,8 @@ const AppRoutes = ({ username, handleLogout }) => (
         <Route path="/groups/create" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><CreateGroup /></Layout></ProtectedRoute>} />
         <Route path="/groups/:groupId" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><GroupDetails /></Layout></ProtectedRoute>} />
         <Route path="/groups/:groupId/update" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><UpdateGroup /></Layout></ProtectedRoute>} />
+        <Route path="/groups/:groupId/update/update-users" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><UpdateGroupUsers /></Layout></ProtectedRoute>} />
+        <Route path="/groups/:groupId/update/delete-users" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><DeleteGroupUsers /></Layout></ProtectedRoute>} />
         <Route path="/documents" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><Documents /></Layout></ProtectedRoute>} />
         <Route path="/documents/:id" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><DocumentDetails /></Layout></ProtectedRoute>} />
         <Route path="/upload-pdf" element={<ProtectedRoute><Layout username={username} handleLogout={handleLogout}><UploadDocument /></Layout></ProtectedRoute>} />

@@ -222,11 +222,11 @@ body {
   cursor: not-allowed;
 }
 
-.update-and-delete .update-btn {
+.update-btn {
   background-color: #cccccc;
 }
 
-.update-and-delete .delete-btn {
+.delete-btn {
   background-color: #f00;
   color: #fff;
 }

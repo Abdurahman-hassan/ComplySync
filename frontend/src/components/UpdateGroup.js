@@ -7,10 +7,13 @@ import axios from "axios";
 const UpdateGroup = () => {
     
     const navigate = useNavigate();
-    const { authToken } = useAuth();
+    const { isAdmin, authToken } = useAuth();
     const { groupId } = useParams();
     const { data: GroupDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/groups/", groupId);
     const [groupName, setGroupName] = useState('');
+    const [isHovered, setIsHovered] = useState(false);
+    const handleMouseEnter = () => setIsHovered(true);
+    const handleMouseLeave = () => setIsHovered(false);
     // const [users, setUsers] = useState([]);
     // const [selectedUsers, setSelectedUsers] = useState([]);
     const headers = {
@@ -75,8 +78,14 @@ const UpdateGroup = () => {
     };
 
     return (
-        <form className='create-group-form' onSubmit={handleSubmit}>
-            <h2>Update Group</h2>
+        <form style={{ maxWidth: '700px' }} className='create-group-form' onSubmit={handleSubmit}>
+            <div className="head">
+                <h2 style={{ marginBottom: '0px', textAlign: 'left' }} >Update Group</h2>
+                <div className="update-and-delete">
+                        {isAdmin && <button className='update-btn' onClick={() => navigate(`/groups/${groupId}/update/update-users`)}>Update Group Members</button>}
+                        {isAdmin && <button onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ backgroundColor: isHovered ? 'rgb(169 7 7)' : 'rgb(225 82 82)' }} className="delete-btn" onClick={() => navigate(`/groups/${groupId}/update/delete-users`)}>Delete Group Member</button>}
+                </div>
+            </div>
             <input
                 type="text"
                 value={groupName}
