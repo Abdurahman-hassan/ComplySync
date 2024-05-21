@@ -19,7 +19,7 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .message {
+        .message, .error-message {
             margin-bottom: 20px;
             padding: 10px;
             color: white;
@@ -29,7 +29,7 @@
         .success {
             background-color: #4CAF50;
         }
-        .error {
+        .error, .error-message {
             background-color: #f44336;
         }
         button {
@@ -46,33 +46,67 @@
         input[type="file"] {
             margin-top: 10px;
         }
+        #loader {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            text-align: center;
+            font-size: 20px;
+            padding-top: 20%;
+        }
     </style>
 </head>
 <body>
-<h1>Upload a PDF</h1>
-{% if messages %}
-    {% for message in messages %}
-    <div class="message {{ message.tags }}">
-        {{ message|safe }}
-    </div>
-    {% endfor %}
-{% endif %}
-<form method="post" enctype="multipart/form-data" id="uploadForm">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Upload PDF</button>
-</form>
-<script>
-    document.getElementById('uploadForm').onsubmit = function(e) {
-        var fileInput = document.querySelector('input[type="file"]');
-        var filePath = fileInput.value;
-        var allowedExtensions = /(\.pdf)$/i;
-        if (!allowedExtensions.exec(filePath)) {
-            alert('Please upload a file with .pdf extension.');
-            fileInput.value = ''; // Clear the file input for new file selection
-            e.preventDefault(); // Prevent form submission
-        }
-    };
-</script>
+    <div id="loader">Please wait...</div>
+    <h1>Upload a PDF</h1>
+    <div class="error-message" style="display: none;"></div>
+    {% if messages %}
+        {% for message in messages %}
+        <div class="message {{ message.tags }}">
+            {{ message|safe }}
+        </div>
+        {% endfor %}
+    {% endif %}
+    <form method="post" enctype="multipart/form-data" id="uploadForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload PDF</button>
+    </form>
+    <script>
+        document.getElementById('uploadForm').onsubmit = function(e) {
+            var fileInput = document.querySelector('input[type="file"]');
+            var files = fileInput.files;
+            var totalSize = 0;
+            var errorMessage = document.querySelector('.error-message');
+
+            for (var i = 0; i < files.length; i++) {
+                totalSize += files[i].size;
+            }
+
+            if (totalSize > 2 * 1024 * 1024) {  // 2 MB limit
+                errorMessage.textContent = 'Total file size must not exceed 2 MB.';
+                errorMessage.style.display = 'block';
+                e.preventDefault();  // Prevent form submission
+                return false;
+            }
+
+            var filePath = fileInput.value;
+            var allowedExtensions = /(\.pdf)$/i;
+            if (!allowedExtensions.exec(filePath)) {
+                errorMessage.textContent = 'Please upload a file with .pdf extension.';
+                errorMessage.style.display = 'block';
+                fileInput.value = '';  // Clear the file input for new file selection
+                e.preventDefault();  // Prevent form submission
+                return false;
+            }
+            errorMessage.style.display = 'none';  // Hide error message if all checks pass
+            document.getElementById('loader').style.display = 'block';  // Show the loader
+        };
+    </script>
 </body>
 </html>
