@@ -80,7 +80,7 @@ const PolicyDetails = () => {
         setIsLoading(true);
         try {
             const response = await axios.patch(`${config.apiBaseUrl}/policies/${id}/`, {
-                status: "published"
+                status: "Acknowledgement"
             }, {
                 headers: { Authorization: `Token ${authToken}` }
             });
@@ -123,14 +123,14 @@ const PolicyDetails = () => {
                         <div className="head">
                             <h2>{policy.base_title}</h2>
                             <div className="update-and-delete">
-                                <button className="complete-btn" disabled={!policy || policy.status === "published"} onClick={handleMarkComplete}>
+                                <button className="complete-btn" disabled={!policy || policy.status === "Acknowledgement"} onClick={handleMarkComplete}>
                                     Complete Reading
                                 </button>
                                 {isAdmin && <button className='update-btn' onClick={() => navigate(`/policies/${id}/update`)} >Update</button>}
                                 {isAdmin && <button className='delete-btn' onClick={deleteChild}>Delete</button>}
                             </div>
                         </div>
-                        {/*<p>Status: {policy.status}</p>*/}
+                        <p>Status: {policy.status}</p>
                         <p>Minimum Read Time: {policy.min_read_time} minutes</p>
                         {/*<p>Allow Download: {policy.allow_download ? 'Yes' : 'No'}</p>*/}
                         <p>Description: {policy.description}</p>
