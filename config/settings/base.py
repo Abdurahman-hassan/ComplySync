@@ -302,7 +302,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 #     'ACCESS_TOKEN_LIFETIME': timedelta(days=20)
 # }
 
-DOMAIN = 'ComplySync.tech'
+DOMAIN = 'greencoder.tech'
 SITE_NAME = 'ComplySync'
 USE_HTTPS = True
 
