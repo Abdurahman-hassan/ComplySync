@@ -132,7 +132,7 @@ const PolicyDetails = () => {
                         </div>
                         {/*<p>Status: {policy.status}</p>*/}
                         <p>Minimum Read Time: {policy.min_read_time} minutes</p>
-                        <p>Allow Download: {policy.allow_download ? 'Yes' : 'No'}</p>
+                        {/*<p>Allow Download: {policy.allow_download ? 'Yes' : 'No'}</p>*/}
                         <p>Description: {policy.description}</p>
                     </div>
                     <div className="documents">
