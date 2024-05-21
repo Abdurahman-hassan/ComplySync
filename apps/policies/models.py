@@ -3,7 +3,7 @@ import uuid
 
 from django.db import models
 
-STATUS_CHOICES = [('draft', 'Draft'), ('published', 'Published')]
+STATUS_CHOICES = [('unnoticed', 'Unnoticed'), ('acknowledgement', 'Acknowledgement')]
 LANGUAGE_CHOICES = [('en', 'English'),
                     ('es', 'Spanish'),
                     ('fr', 'French'),
