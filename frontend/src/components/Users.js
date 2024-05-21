@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../App';
 import '../styles/Users.css';
 import LoadingSpinner from './LoadingSpinner';
+import config from '../config';
 
 const Users = () => {
     const { authToken } = useAuth(); 
@@ -41,7 +42,7 @@ const Users = () => {
     }, [authToken]);
 
     useEffect(() => {
-        fetchUsers('http://127.0.0.1:8000/api/auth/users/');
+        fetchUsers(`${config.apiBaseUrl}/auth/users/`);
     }, [fetchUsers]);
 
     const handleAddUser = () => {

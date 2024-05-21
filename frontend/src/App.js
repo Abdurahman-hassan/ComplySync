@@ -4,6 +4,7 @@ import { useState, useEffect, useMemo, useContext, createContext } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
 import axios from 'axios';
+import config from './config';
 
 // Create a context for the user's authentication state
 export const AuthContext = createContext();
@@ -37,7 +38,7 @@ function App() {
       if (!authToken) return; // Exit early if there is no auth token
 
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/auth/users/me/', { headers });
+        const response = await axios.get(`${config.apiBaseUrl}/auth/users/me/`, { headers });
         if (response.data.name) {
           setUsername(response.data.name);
         } else {

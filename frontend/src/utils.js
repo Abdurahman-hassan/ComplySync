@@ -18,7 +18,7 @@ export const useDelete = (url, id) => {
 
     const deleteChild = async () => {
         try {
-            const response = await axios.delete(url + id, {
+            const response = await axios.delete(`${url}${id}/`, {
                 headers: { 'Authorization': `Token ${authToken}` }
             });
             console.log(response);

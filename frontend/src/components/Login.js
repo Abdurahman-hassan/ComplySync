@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../App';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
+import config from '../config';
 
 const Login = () => {
 
@@ -27,7 +28,7 @@ const Login = () => {
                 password: e.target.password.value, // Assuming password input has a name="password"
             };
 
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/token/login/', formData, {
+            const response = await axios.post(`${config.apiBaseUrl}/auth/token/login/`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

@@ -4,6 +4,7 @@ import { useAuth } from '../App';
 import axios from 'axios';
 import '../styles/AddUsers.css';
 import { ThreeDots } from "react-loader-spinner";
+import config from '../config';
 
 function AddUsers() {
     const { authToken } = useAuth();
@@ -93,7 +94,7 @@ function AddUsers() {
         setIsLoading(true);
         try {
             console.log("emails", emails);
-            const response = await axios.post('http://127.0.0.1:8000/api/bulk-create/', { emails: emails }, { headers });
+            const response = await axios.post(`${config.apiBaseUrl}/bulk-create/`, { emails: emails }, { headers });
             console.log('Server Response:', response);
             if (response.status === 201) {
                 setSuccessMessage(`Successfully uploaded ${emails.length} emails!`);

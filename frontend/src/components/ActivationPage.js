@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LoadingSpinner from './LoadingSpinner';
-
+import config from '../config';
 
 function useQuery() {
     const location = useLocation();
@@ -25,7 +25,7 @@ function ActivationPage() {
             setIsLoading(true);
 
             try {
-                const response = await axios.post('http://127.0.0.1:8000/api/auth/users/activation/', {
+                const response = await axios.post(`${config.apiBaseUrl}/auth/users/activation/`, {
                     uid,
                     token,
                 });

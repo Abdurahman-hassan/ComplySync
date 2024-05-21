@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from'react-router-dom';
 import axios from 'axios';
 import '../styles/CreatePolicy.css';
+import config from '../config';
 
 const CreatePolicy = () => {
 
@@ -33,7 +34,7 @@ const CreatePolicy = () => {
         event.preventDefault();
         try {
             console.log('formData:', formData);
-            const response = await axios.post('http://127.0.0.1:8000/api/policies/', formData, { headers });
+            const response = await axios.post(`${config.apiBaseUrl}/policies/`, formData, { headers });
             console.log('response:', response);
             if (setNewPolicyCreated) {
                 setNewPolicyCreated(true);

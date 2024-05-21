@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../App";
 import { ThreeDots } from "react-loader-spinner";
+import config from "../config";
 
 const DeleteGroupUsers = () => {
 
@@ -23,7 +24,7 @@ const DeleteGroupUsers = () => {
         // Fetch the list of users when the component mounts
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/auth/users/', {
+                const response = await axios.get(`${config.apiBaseUrl}/auth/users/`, {
                     headers: { 'Authorization': `Token ${authToken}` }
                 });
                 console.log(response.data.results);
@@ -62,7 +63,7 @@ const DeleteGroupUsers = () => {
         const startTime = performance.now();
         setIsLoading(true);
         try {
-            const response = await axios.delete(`http://127.0.0.1:8000/api/groups/${groupId}/assign_users_to_group/`, {
+            const response = await axios.delete(`${config.apiBaseUrl}/groups/${groupId}/assign_users_to_group/`, {
                 headers: { 'Authorization': `Token ${authToken}` },
                 data
             });

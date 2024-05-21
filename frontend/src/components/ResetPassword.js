@@ -3,6 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ThreeDots } from 'react-loader-spinner';
+import config from '../config';
 
 function useQuery() {
     const location = useLocation();
@@ -32,7 +33,7 @@ const ResetPassword = () => {
             setIsLoading(true);
             try {
                 const response = await axios.post(
-                    'http://localhost:8000/api/auth/users/reset_password_confirm/',
+                    `${config.apiBaseUrl}/auth/users/reset_password_confirm/`,
                     { uid: uid, token: token, new_password: newPassword, re_new_password: confirmPassword }
                 );
                 if (response.status === 200) {

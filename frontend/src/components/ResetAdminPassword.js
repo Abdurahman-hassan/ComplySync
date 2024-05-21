@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useAuth } from "../App";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-
 import axios from "axios";
+import config from "../config";
 
 const ResetAdminPassword = () => {
 
@@ -30,7 +30,7 @@ const ResetAdminPassword = () => {
         const startTime = performance.now();
         setIsLoading(true);
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/users/set_password/', {
+            const response = await axios.post(`${config.apiBaseUrl}/auth/users/set_password/`, {
                 current_password: newPassword,
                 new_password: newPassword,
                 re_new_password: confirmPassword

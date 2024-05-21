@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import config from '../config';
 
 function RegistrationSuccess({ userEmail }) {
     const [success, setSuccess] = useState('');
@@ -7,7 +8,7 @@ function RegistrationSuccess({ userEmail }) {
 
 
     const resendActivationEmail = () => {
-        axios.post('http://127.0.0.1:8000/api/auth/users/resend_activation/', { email: userEmail })
+        axios.post(`${config.apiBaseUrl}/auth/users/resend_activation/`, { email: userEmail })
             .then(response => {
                 if (response.status === 200) {
                     setSuccess('Activation email has been resent. Please check your inbox.');

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../App";
 import axios from "axios";
-
+import config from "../config";
 
 // Layout component that includes the sidebar and navbar
 const Layout = ({ children, username, handleLogout }) => {
@@ -25,7 +25,7 @@ const Layout = ({ children, username, handleLogout }) => {
     const getActiveLinkClass = ({ isActive }) => isActive ? 'active' : '';
 
     const logout = async () => {
-        await axios.post('http://127.0.0.1:8000/api/auth/token/logout/', null, { headers });
+        await axios.post(`${config.apiBaseUrl}/auth/token/logout/`, null, { headers });
         handleLogout();
         navigate('/login');
     };

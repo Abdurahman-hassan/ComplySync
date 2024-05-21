@@ -3,13 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../App";
 import useFetchDetails from "../useFetch";
 import axios from "axios";
+import config from "../config";
 
 const UpdateGroup = () => {
     
     const navigate = useNavigate();
     const { isAdmin, authToken } = useAuth();
     const { groupId } = useParams();
-    const { data: GroupDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/groups/", groupId);
+    const { data: GroupDetails, error } = useFetchDetails(`${config.apiBaseUrl}/groups/`, groupId);
     const [groupName, setGroupName] = useState('');
     const [isHovered, setIsHovered] = useState(false);
     const handleMouseEnter = () => setIsHovered(true);
@@ -63,7 +64,7 @@ const UpdateGroup = () => {
         try {
 
             if (groupName !== GroupDetails.group_name) {
-                await axios.put(`http://127.0.0.1:8000/api/groups/${groupId}/`, { group_name: groupName }, { headers });
+                await axios.put(`${config.apiBaseUrl}/groups/${groupId}/`, { group_name: groupName }, { headers });
             }
 
             // Assign users to the group using the new group ID

@@ -4,6 +4,7 @@ import { useAuth } from '../App';
 import '../styles/Profile.css';
 import LoadingSpinner from './LoadingSpinner';
 import { useNavigate } from 'react-router-dom';
+import config from '../config';
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -19,7 +20,7 @@ const Profile = () => {
             const startTime = performance.now();
             setIsLoading(true);
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/auth/users/me', {
+                const response = await axios.get(`${config.apiBaseUrl}/auth/users/me`, {
                     headers: { Authorization: `Token ${authToken}` },
                 });
                 setUser(response.data);
@@ -53,7 +54,7 @@ const Profile = () => {
         const userEmail = user.email;
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/auth/users/reset_password/', {
+            const response = await axios.post(`${config.apiBaseUrl}/auth/users/reset_password/`, {
                 email: userEmail,
             });
             console.log('Reset password request sent:', response.data);

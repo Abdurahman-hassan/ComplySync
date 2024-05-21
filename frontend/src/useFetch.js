@@ -11,7 +11,7 @@ const useFetchDetails = (url, id) => {
     useEffect(() => {
             const fetchDetails = async () => {
                 try {
-                    const response = await axios.get(url + id, {
+                    const response = await axios.get(`${url}${id}/`, {
                         headers: { 'Authorization': `Token ${authToken}` }
                     });
                     console.log(response.data);

@@ -5,6 +5,7 @@ import { useAuth } from '../App';
 import  '../styles/Documents.css';
 import { formatDate } from '../utils';
 import LoadingSpinner from './LoadingSpinner';
+import config from '../config';
 
 const Documents = () => {
 
@@ -44,7 +45,7 @@ const Documents = () => {
 
 
     useEffect(() => {
-        fetchDocuments('http://127.0.0.1:8000/api/languages/');
+        fetchDocuments(`${config.apiBaseUrl}/languages/`);
     }, [fetchDocuments]);
 
     const handleNextPage = () => {
@@ -60,7 +61,7 @@ const Documents = () => {
     };
 
     const handleUploadDocument = async () => {
-        const url = 'http://127.0.0.1:8000/api/upload-pdf/';
+        const url = `${config.apiBaseUrl}/upload-pdf/`;
         window.open(url, '_blank');
     };
 

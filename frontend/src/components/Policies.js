@@ -5,6 +5,7 @@ import axios from 'axios';
 import '../styles/Policies.css';
 import { useAuth } from '../App';
 import LoadingSpinner from './LoadingSpinner';
+import config from '../config';
 
 const Policies = () => {
     const [policies, setPolicies] = useState([]);
@@ -49,7 +50,7 @@ const Policies = () => {
 
 
     useEffect(() => {
-        fetchPolicies('http://127.0.0.1:8000/api/policies/');
+        fetchPolicies(`${config.apiBaseUrl}/policies/`);
     }, [fetchPolicies]);
 
     const handleCreatePolicy = () => {

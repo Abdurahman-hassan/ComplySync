@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../App';
 import '../styles/CreateCampaign.css';
+import config from '../config';
 
 const CreateCampaign = () => {
 
@@ -34,7 +35,7 @@ const CreateCampaign = () => {
                 console.error('Error fetching policies:', error);
             }
         };
-        fetchPolicies('http://127.0.0.1:8000/api/policies/');
+        fetchPolicies(`${config.apiBaseUrl}/policies/`);
     }, [authToken]);
 
     useEffect(() => {
@@ -55,14 +56,14 @@ const CreateCampaign = () => {
                 console.error('Error fetching groups:', error);
             }
         };
-        fetchGroups('http://127.0.0.1:8000/api/groups/');
+        fetchGroups(`${config.apiBaseUrl}/groups/`);
     }, [authToken]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             console.log(`campaign_name: ${campaignName}\nstart_date: ${startDateTime}\nend_date: ${endDateTime}`);
-            const campaignResponse = await axios.post('http://127.0.0.1:8000/api/campaigns/', {
+            const campaignResponse = await axios.post(`${config.apiBaseUrl}/campaigns/`, {
                 name: campaignName,
                 start_date: startDateTime,
                 end_date: endDateTime,
@@ -76,7 +77,7 @@ const CreateCampaign = () => {
                 console.log(`policies_ids: ${selectedPolicies}`);
                 console.log(`target_groups_ids: ${selectedGroups}`);
                 console.log(`completed_users_groups_ids: ${selectedGroups}`);
-                await axios.post(`http://127.0.0.1:8000/api/campaigns/${campaignId}/assign-resources/`, {
+                await axios.post(`${config.apiBaseUrl}/campaigns/${campaignId}/assign-resources/`, {
                     policies_ids: selectedPolicies, // An array of policies IDs to be added to the campaign
                     target_groups_ids: selectedGroups,
                     completed_users_groups_ids: selectedGroups

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../App";
 import { ThreeDots } from "react-loader-spinner";
+import config from "../config";
 
 const UpdateGroupUsers = () => {
 
@@ -20,7 +21,7 @@ const UpdateGroupUsers = () => {
         // Fetch the list of users when the component mounts
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/auth/users/', {
+                const response = await axios.get(`${config.apiBaseUrl}/auth/users/`, {
                     headers: { 'Authorization': `Token ${authToken}` }
                 });
                 console.log(response.data.results);
@@ -67,7 +68,7 @@ const UpdateGroupUsers = () => {
         const startTime = performance.now();
         setIsLoading(true);
         try {
-            const response = await axios.put(`http://127.0.0.1:8000/api/groups/${groupId}/assign_users_to_group/`, data, {
+            const response = await axios.put(`${config.apiBaseUrl}/groups/${groupId}/assign_users_to_group/`, data, {
                 headers: { 'Authorization': `Token ${authToken}` }
             });
             console.log(response.data);

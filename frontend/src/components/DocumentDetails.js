@@ -5,19 +5,20 @@ import useFetchDetails from '../useFetch';
 import { useAuth } from '../App';
 import '../styles/Documents.css'
 import LoadingSpinner from './LoadingSpinner';
+import config from '../config';
 
 const DocumentDetails = () => {
 
     const { id } = useParams();
     const { authToken } = useAuth();
-    const { data: document, error } = useFetchDetails("http://127.0.0.1:8000/api/languages/", id);
+    const { data: document, error } = useFetchDetails(`${config.apiBaseUrl}/languages/`, id);
     const [pdfFile, setPdfFile] = useState(null);
     const [policy, setPolicy] = useState('');
 
     useEffect(() => {
         const fetchpdfFile = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/languages/${id}/view-pdf/`, {
+                const response = await axios.get(`${config.apiBaseUrl}/languages/${id}/view-pdf/`, {
                     headers: { Authorization: `Token ${authToken}` }
                 });
                 setPdfFile(response.data.presigned_url);
@@ -28,7 +29,7 @@ const DocumentDetails = () => {
 
         const fetchPolicy = async () => {
             try {
-                const response = await axios.get(`http://127.0.0.1:8000/api/policies/${document.policy}/`, {
+                const response = await axios.get(`${config.apiBaseUrl}/policies/${document.policy}/`, {
                     headers: { Authorization: `Token ${authToken}` }
                 });
                 console.log(response.data);

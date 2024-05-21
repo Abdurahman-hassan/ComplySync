@@ -5,6 +5,7 @@ import { useAuth } from '../App';
 import { formatDate } from '../utils';
 import '../styles/Campaigns.css';
 import LoadingSpinner from './LoadingSpinner';
+import config from '../config';
 
 const Campaigns = () => {
 
@@ -42,7 +43,7 @@ const Campaigns = () => {
     }, [authToken]);
 
     useEffect(() => {
-        fetchCampaigns('http://127.0.0.1:8000/api/campaigns/');
+        fetchCampaigns(`${config.apiBaseUrl}/campaigns/`);
     }, [fetchCampaigns]);
 
     const handleCampaignClick = (campaignId) => {

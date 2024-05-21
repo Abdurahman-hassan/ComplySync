@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import RegistrationSuccess from './RegistrationSuccess';
 import axios from 'axios';
 import { ThreeDots } from 'react-loader-spinner';
+import config from '../config';
 
 const Signup = () => {
 
@@ -34,7 +35,7 @@ const Signup = () => {
         setError(null); // Clear any previous error
 
         try {
-            await axios.post('http://127.0.0.1:8000/api/auth/users/', formData, {
+            await axios.post(`${config.apiBaseUrl}/auth/users/`, formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

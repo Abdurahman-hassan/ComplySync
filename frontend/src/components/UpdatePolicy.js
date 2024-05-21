@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useAuth } from '../App';
 import useFetchDetails from '../useFetch';
 import '../styles/CreatePolicy.css';
+import config from '../config';
 
 const UpdatePolicy = () => {
 
@@ -15,7 +16,7 @@ const UpdatePolicy = () => {
     const [status, setStatus] = useState('');
     const [allow_download, setAllowDownload] = useState(false);
     const [description, setDescription] = useState('');
-    const { data: policyDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/policies/", id);
+    const { data: policyDetails, error } = useFetchDetails(`${config.apiBaseUrl}/policies/`, id);
     const headers = {
         Authorization: `Token ${authToken}`,
     };
@@ -52,7 +53,7 @@ const UpdatePolicy = () => {
 
         if (Object.keys(updatedData).length > 0) {
             try {
-                const response = await axios.patch(`http://127.0.0.1:8000/api/policies/${id}/`, updatedData, { headers });
+                const response = await axios.patch(`${config.apiBaseUrl}/policies/${id}/`, updatedData, { headers });
                 console.log('response:', response);
                 navigate('/policies');
             } catch (error) {

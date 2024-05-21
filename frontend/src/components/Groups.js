@@ -5,6 +5,7 @@ import { useAuth } from '../App';
 import { formatDate } from '../utils';
 import '../styles/Groups.css';
 import LoadingSpinner from './LoadingSpinner';
+import config from '../config';
 
 const Groups = () => {
 
@@ -47,7 +48,7 @@ const Groups = () => {
     }, [authToken]);
 
     useEffect(() => {
-        fetchGroups('http://127.0.0.1:8000/api/groups/');
+        fetchGroups(`${config.apiBaseUrl}/groups/`);
     }, [fetchGroups]);
 
     const handleGroupClick = (groupId) => {

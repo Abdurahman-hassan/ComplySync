@@ -5,14 +5,15 @@ import useFetchDetails from '../useFetch';
 import { useDelete } from '../utils';
 import { useAuth } from '../App';
 import LoadingSpinner from './LoadingSpinner';
+import config from '../config';
 
 const CampaignDetails = () => {
 
     const navigate = useNavigate();
     const { isAdmin } = useAuth();
     const { campaignId } = useParams();
-    const { data: campaignDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/campaigns/", campaignId);
-    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("http://127.0.0.1:8000/api/campaigns/", campaignId);
+    const { data: campaignDetails, error } = useFetchDetails(`${config.apiBaseUrl}/campaigns/`, campaignId);
+    const { response: deleteResponse, error: deleteError, deleteChild } = useDelete(`${config.apiBaseUrl}/campaigns/`, campaignId);
 
     if (deleteResponse) {
         console.log(deleteResponse);
