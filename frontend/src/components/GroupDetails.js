@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { formatDate } from '../utils';
-import useFetch from '../useFetch';
+import useFetchDetails from '../useFetch';
 import { useAuth } from '../App';
 import { useDelete } from '../utils';
 import LoadingSpinner from './LoadingSpinner';
@@ -11,7 +11,7 @@ const GroupDetails = () => {
     const { groupId } = useParams();
     const { isAdmin } = useAuth();
     const navigate = useNavigate();
-    const { data: groupDetails, error } = useFetch(`http://127.0.0.1:8000/api/groups/`, groupId);
+    const { data: groupDetails, error } = useFetchDetails(`http://127.0.0.1:8000/api/groups/`, groupId);
     const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("http://127.0.0.1:8000/api/groups/", groupId);
 
     if (deleteResponse) {

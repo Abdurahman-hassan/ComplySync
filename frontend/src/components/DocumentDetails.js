@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import useFetch from '../useFetch';
+import useFetchDetails from '../useFetch';
 import { useAuth } from '../App';
 import '../styles/Documents.css'
 import LoadingSpinner from './LoadingSpinner';
@@ -10,7 +10,7 @@ const DocumentDetails = () => {
 
     const { id } = useParams();
     const { authToken } = useAuth();
-    const { data: document, error } = useFetch("http://127.0.0.1:8000/api/languages/", id);
+    const { data: document, error } = useFetchDetails("http://127.0.0.1:8000/api/languages/", id);
     const [pdfFile, setPdfFile] = useState(null);
     const [policy, setPolicy] = useState('');
 

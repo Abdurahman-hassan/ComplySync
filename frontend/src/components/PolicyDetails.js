@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/PolicyDetails.css';
-import useFetch from '../useFetch';
+import useFetchDetails from '../useFetch';
 import { useAuth } from '../App';
 import { useDelete } from '../utils';
 import LoadingSpinner from './LoadingSpinner';
@@ -12,7 +12,7 @@ const PolicyDetails = () => {
     const navigate = useNavigate();
     const { isAdmin, authToken } = useAuth();
     const { id } = useParams();
-    const { data: policy, error } = useFetch("http://127.0.0.1:8000/api/policies/", id);
+    const { data: policy, error } = useFetchDetails("http://127.0.0.1:8000/api/policies/", id);
     const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("http://127.0.0.1:8000/api/policies/", id);
     const [isLoading, setIsLoading] = useState(false);
     const minimumLoadingTime = 400;

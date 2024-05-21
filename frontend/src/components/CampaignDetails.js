@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, useNavigate, NavLink } from 'react-router-dom';
 import { formatDate } from '../utils';
-import useFetch from '../useFetch';
+import useFetchDetails from '../useFetch';
 import { useDelete } from '../utils';
 import { useAuth } from '../App';
 import LoadingSpinner from './LoadingSpinner';
@@ -11,7 +11,7 @@ const CampaignDetails = () => {
     const navigate = useNavigate();
     const { isAdmin } = useAuth();
     const { campaignId } = useParams();
-    const { data: campaignDetails, error } = useFetch("http://127.0.0.1:8000/api/campaigns/", campaignId);
+    const { data: campaignDetails, error } = useFetchDetails("http://127.0.0.1:8000/api/campaigns/", campaignId);
     const { response: deleteResponse, error: deleteError, deleteChild } = useDelete("http://127.0.0.1:8000/api/campaigns/", campaignId);
 
     if (deleteResponse) {
