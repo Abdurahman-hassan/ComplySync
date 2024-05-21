@@ -21,10 +21,10 @@ function RegistrationSuccess({ userEmail }) {
     };
 
     return (
-        <div style={{ textAlign: 'center', padding: '20px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
             <h1 style={{ color: '#333' }} >Registration Successful</h1>
-            <p style={{ marginBottom: '15px', color: '#777' }} >An activation email has been sent to {userEmail}. Please check your inbox to activate your account.</p>
-            <button onClick={resendActivationEmail} style={{ padding: '10px', backgroundColor: '#007bff', color: 'white' }} >Resend Email</button>
+            <p style={{ margin: '10px auto', textAlign: 'center', marginBottom: '15px', color: '#777' }} >An activation email has been sent to {userEmail}. Please check your inbox to activate your account.</p>
+            <button onClick={resendActivationEmail} style={{ padding: '15px 20px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }} >Resend Email</button>
             {success && <div className='success-message' >{success}</div>}
             {error && <div className='error-message'>{error}</div>}
         </div>
