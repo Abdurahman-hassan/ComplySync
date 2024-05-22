@@ -9,6 +9,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, status
 from rest_framework import viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from apps.permissions import IsAdminOrRestrictedOwnData
@@ -22,7 +23,7 @@ logger = logging.getLogger(__name__)
 class PolicyViewSet(viewsets.ModelViewSet):
     queryset = Policy.objects.all()
     serializer_class = PolicySerializer
-    permission_classes = [IsAdminOrRestrictedOwnData]
+    permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     search_fields = ['base_title', 'description', 'languages__localized_title']
 
@@ -34,22 +35,6 @@ class PolicyViewSet(viewsets.ModelViewSet):
             user_group_ids = self.request.user.groups.values_list('id', flat=True)
             # Filter policies that are linked through campaigns to any of the groups the user belongs to
             return Policy.objects.filter(campaigns__target_groups__group__id__in=user_group_ids)
-
-    def partial_update(self, request, *args, **kwargs):
-        if not request.user.is_staff:
-            # Allow non-admin users to only update the 'status' field
-            if set(request.data.keys()) > {'status'}:
-                return Response({"detail": "You are only allowed to update the status."},
-                                status=status.HTTP_400_BAD_REQUEST)
-            if 'status' in request.data:
-                instance = self.get_object()
-                instance.status = request.data.get('status')
-                instance.save(update_fields=['status'])
-                serializer = self.get_serializer(instance)
-                return Response(serializer.data)
-            return Response({"detail": "No status provided."},
-                            status=status.HTTP_400_BAD_REQUEST)
-        return super().partial_update(request, *args, **kwargs)
 
 
 class LanguageViewSet(viewsets.ModelViewSet):
