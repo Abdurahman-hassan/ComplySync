@@ -39,8 +39,8 @@ class UserManager(DjangoUserManager["User"]):
 
     # type: ignore[override]
     def create_superuser(self, email: str, password: str | None = None, **extra_fields):
-        if self.model.objects.filter(is_superuser=True).exists():
-            raise ValidationError("There can be only one superuser.")
+        # if self.model.objects.filter(is_superuser=True).exists():
+        #     raise ValidationError("There can be only one superuser.")
         password = Generate.password()
 
         extra_fields.setdefault("is_staff", True)
