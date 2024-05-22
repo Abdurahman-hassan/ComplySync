@@ -22,6 +22,11 @@ class GroupViewSet(viewsets.ModelViewSet):
         else:
             return GroupMetadata.objects.filter(group__in=self.request.user.groups.all())
 
+    def destroy(self, request, *args, **kwargs):
+        group_metadata = self.get_object()
+        group_metadata.group.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     @action(detail=True, methods=['post', 'put', 'delete'], url_path='assign_users_to_group')
     def assign_users_to_group(self, request, pk=None):
         group_metadata = self.get_object()
