@@ -11,7 +11,7 @@ const CreatePolicy = () => {
     const { setNewPolicyCreated } = location.state || {};
     const [formData, setFormData] = useState({
         base_title: '',
-        status: 'draft', // Assuming 'draft' is a valid status
+        status: 'unnoticed', // Assuming 'unnoticed' is a valid status
         min_read_time: 0,
         allow_download: false,
         description: '',

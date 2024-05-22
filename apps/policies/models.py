@@ -62,7 +62,7 @@ def upload_to_language_document(instance, filename):
 
 class Policy(models.Model):
     base_title = models.CharField(max_length=255)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='draft')
+    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='unnoticed')
     min_read_time = models.PositiveIntegerField(help_text="Minimum time required to read the policy in minutes.")
     allow_download = models.BooleanField(default=False)
     description = models.TextField()
