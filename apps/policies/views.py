@@ -36,19 +36,20 @@ class PolicyViewSet(viewsets.ModelViewSet):
             return Policy.objects.filter(campaigns__target_groups__group__id__in=user_group_ids)
 
     def partial_update(self, request, *args, **kwargs):
-        # Restrict non-admin users to only update the 'status' field
         if not request.user.is_staff:
+            # Allow non-admin users to only update the 'status' field
             if set(request.data.keys()) > {'status'}:
                 return Response({"detail": "You are only allowed to update the status."},
                                 status=status.HTTP_400_BAD_REQUEST)
+            if 'status' in request.data:
+                instance = self.get_object()
+                instance.status = request.data.get('status')
+                instance.save(update_fields=['status'])
+                serializer = self.get_serializer(instance)
+                return Response(serializer.data)
+            return Response({"detail": "No status provided."},
+                            status=status.HTTP_400_BAD_REQUEST)
         return super().partial_update(request, *args, **kwargs)
-
-    def create(self, request, *args, **kwargs):
-        # Limit creation to admin users; others get a permission denied message
-        if not request.user.is_staff:
-            return Response({"detail": "You do not have permission to perform this action."},
-                            status=status.HTTP_403_FORBIDDEN)
-        return super().create(request, *args, **kwargs)
 
 
 class LanguageViewSet(viewsets.ModelViewSet):
