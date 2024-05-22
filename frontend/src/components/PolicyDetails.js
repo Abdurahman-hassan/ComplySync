@@ -80,7 +80,7 @@ const PolicyDetails = () => {
         setIsLoading(true);
         try {
             const response = await axios.patch(`${config.apiBaseUrl}/policies/${id}/`, {
-                status: "Acknowledgement"
+                status: "acknowledgement"
             }, {
                 headers: { Authorization: `Token ${authToken}` }
             });
@@ -123,7 +123,7 @@ const PolicyDetails = () => {
                         <div className="head">
                             <h2>{policy.base_title}</h2>
                             <div className="update-and-delete">
-                                <button className="complete-btn" disabled={!policy || policy.status === "Acknowledgement"} onClick={handleMarkComplete}>
+                                <button className="complete-btn" disabled={!policy || policy.status === "acknowledgement"} onClick={handleMarkComplete}>
                                     Complete Reading
                                 </button>
                                 {isAdmin && <button className='update-btn' onClick={() => navigate(`/policies/${id}/update`)} >Update</button>}
